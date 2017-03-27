@@ -13,8 +13,6 @@
     ~/.gitconfig:
     ~/.git-prompt.bash:
     ~/.indent.pro:
-    ~/.vim/autoload/plug.vim:
-        path: plug.vim
     ~/.tmux.conf:
     ~/.vim:
     ~/.vimrc:
