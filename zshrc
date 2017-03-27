@@ -38,7 +38,7 @@ source ~/.dotfiles/zsh-git-prompt/zshrc.sh
 PROMPT='%(?..[%F{red}%?%f] )%F{cyan}%B%m%b%f %F{yellow}%n%f %S>_%#%s '
 
 # home replaced with ~, up to 2 dir max, and git status of repo if available
-RPROMPT='%U%2~%u $(git_super_status)'
+RPROMPT='%U%2d%u $(git_super_status)'
 
 # spelling correction
 setopt CORRECT_ALL
