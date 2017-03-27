@@ -14,7 +14,8 @@
     ~/.git-prompt.bash:
     ~/.indent.pro:
     ~/.tmux.conf:
-    ~/.vim:
+    ~/.vim/autoload/plug.vim:
+        path: plug.vim
     ~/.vimrc:
     ~/.xinitrc:
     ~/.Xresources:
