@@ -35,13 +35,13 @@ bindkey -v
 source ~/.dotfiles/zsh-git-prompt/zshrc.sh
 # non-zero status code
 # bold hostname, regular username, prompt and privilege
-PROMPT='%(?..[%F{red}%?%f] )%F{cyan}%B%m%b%f %F{yellow}%n%f %S>_%#%s '
+PROMPT=$'%(?..[%F{red}%?%f] )%F{cyan}%B%m%b%f %F{yellow}%n%f %{\e[5m%}%S>_%#%s %{\e[0m% '
 
 # home replaced with ~, up to 2 dir max, and git status of repo if available
 RPROMPT='%U%2d%u $(git_super_status)'
 
 # spelling correction
-setopt CORRECT_ALL
+setopt CORRECT
 
 # don't redirect-overwrite files
 setopt NOCLOBBER
@@ -72,10 +72,11 @@ if [ -x /usr/bin/dircolors ]; then
     alias lsl='ls -1 | wc -l'
     alias gcc='gcc -mtune=native -Wall'
     alias calc='gnome-calculator &'
-    alias lst='ll -t'
-                alias reflector='sudo reflector --verbose --country "United States" -l 20 --sort rate --save /etc/pacman.d/mirrorlist'
-                alias pacup='sudo su -c "pacman -Syy; pacman -Syu; pacman -Scc"'
-                alias top='htop'
+		alias lst='ll -t'
+		alias reflector='sudo reflector --verbose --country "United States" -l 20 --sort rate --save /etc/pacman.d/mirrorlist'
+		alias pacup='sudo su -c "pacman -Syy; pacman -Syu; pacman -Scc"'
+		alias top='htop'
+		alias sudp='nocorrect sudo'
 fi
 
 HISTSIZE=10000
