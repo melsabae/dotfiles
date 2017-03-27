@@ -3,4 +3,4 @@
 	url = https://github.com/anishathalye/dotbot
 [submodule "zsh-git-prompt"]
 	path = zsh-git-prompt
-	url = https://github.com/olivierverdier/zsh-git-prompt.git
+	url = git@github.com:olivierverdier/zsh-git-prompt.git
