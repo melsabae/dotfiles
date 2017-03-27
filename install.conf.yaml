@@ -1,3 +1,29 @@
-- clean: []
-- link: {}
-- shell: []
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config', '~/.vim/autoload']
+
+- link:
+    ~/.bash_profile:
+    ~/.bashrc:
+    ~/.config/awesome:
+        path: config/awesome
+    ~/.gitconfig:
+    ~/.git-prompt.bash:
+    ~/.indent.pro:
+    ~/.vim/autoload/plug.vim:
+        path: plug.vim
+    ~/.tmux.conf:
+    ~/.vim:
+    ~/.vimrc:
+    ~/.xinitrc:
+    ~/.Xresources:
+    ~/.zprofile:
+    ~/.zshrc:
+
+- shell:
+  - mkdir -p ~/.vim/autoload
+  - git submodule update
+

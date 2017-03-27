@@ -1,0 +1,19 @@
+[user]
+	name = Mohammad El-Sabae
+	email = mohammad.elsabae@gmail.com
+[core]
+	editor = vim
+	;autocrlf = input
+	;safecrlf = true
+[merge]
+	tool = vimdiff
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	pager = true
+	ui = auto
+
+[alias]
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
