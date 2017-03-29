@@ -117,3 +117,4 @@ man() {
     command man "$@"
 }
 
+TERM=xterm
