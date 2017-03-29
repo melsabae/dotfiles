@@ -16,7 +16,7 @@ zstyle ':completion:*' preserve-prefix '//[^/]##/'
 zstyle ':completion:*' prompt 'found %e errors in completion'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' squeeze-slashes true
-zstyle :compinstall filename '/home/saba/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -37,7 +37,7 @@ source ~/.dotfiles/zsh-git-prompt/zshrc.sh
 # bold hostname, regular username, prompt and privilege
 PROMPT=$'%(?..[%F{red}%?%f] )%F{cyan}%B%m%b%f %F{yellow}%n%f %{\e[5m%}%S>_%#%s %{\e[0m% '
 
-# home replaced with ~, up to 2 dir max, and git status of repo if available
+# up to 2 dirs, and status of git repo if available
 RPROMPT='%U%2d%u $(git_super_status)'
 
 # spelling correction
