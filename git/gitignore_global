@@ -44,3 +44,8 @@ a.out
 *.o
 *.gch
 
+# static analyzers
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+.color_coded
+
