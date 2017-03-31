@@ -3,7 +3,7 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config']
+- clean: ['~']
 
 - link:
     ~/.bash_profile:
@@ -16,10 +16,12 @@
         path: bash/bash_history
 
     ~/.config/awesome:
-        path: config/awesome
+        path: awesome
 
     ~/.gitconfig:
         path: git/gitconfig
+    ~/.gitignore_global:
+        path: git/gitignore_global
 
     ~/.config/cmus:
         path: cmus
@@ -73,6 +75,5 @@
         path: vbox/vboxclient-draganddrop.pid
 
 - shell:
-  - mkdir -p ~/.config
   - git submodule update
 
