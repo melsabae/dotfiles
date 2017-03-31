@@ -7,30 +7,53 @@
 
 - link:
     ~/.bash_profile:
+        path: bash/bash_profile
     ~/.bashrc:
+        path: bash/bashrc
+    ~/.git-prompt.bash:
+        path: bash/git-prompt.bash
+
     ~/.config/awesome:
         path: config/awesome
+
     ~/.gitconfig:
-    ~/.git-prompt.bash:
+        path: git/gitconfig
+
     ~/.config/cmus:
         path: cmus
-    ~/.config/htop/htoprc:
-        path: htoprc
+
+    ~/.config/htop:
+        path: htop
+
     ~/.indent.pro:
+        path: misc/indent.pro
+
     ~/.config/locale.conf:
-        path: locale.conf
+        path: misc/locale.conf
+
     ~/.config/.pastebinit.xml:
-        path: pastebinit.xml
+        path: misc/pastebinit.xml
+
     ~/.tmux.conf:
+        path: misc/tmux.conf
+
     ~/.vim/autoload/plug.vim:
-        path: plug.vim
+        path: vim/plug.vim
     ~/.vimrc:
+        path: vim/vimrc
+
     ~/.xinitrc:
+        path: x/xinitrc
     ~/.Xresources:
+        path: x/Xresources
+
     ~/.zprofile:
+        path: zsh/zprofile
     ~/.zshrc:
+        path: zsh/zshrc
 
 - shell:
-  - mkdir -p ~/.vim/autoload ~/.config/htop
+  - mkdir -p ~/.config
+  - mkdir -p ~/.vim/autoload
   - git submodule update
 
