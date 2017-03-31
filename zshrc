@@ -1,7 +1,11 @@
 # Created by newuser for 5.3.1
 autoload -Uz compinit promptinit
+autoload -U history-search-end
+autoload -Uz compinit
 compinit
 promptinit
+
+export PAGER="less"
 
 # The following lines were added by compinstall
 
@@ -18,8 +22,6 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' squeeze-slashes true
 zstyle :compinstall filename '~/.zshrc'
 
-autoload -Uz compinit
-compinit
 # End of lines added by compinstall
 
 # vi keybound menu selection
@@ -33,6 +35,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v
 
 source ~/.dotfiles/zsh-git-prompt/zshrc.sh
+
 # non-zero status code
 # bold hostname, regular username, prompt and privilege
 PROMPT=$'%(?..[%F{red}%?%f] )%F{cyan}%B%m%b%f %F{yellow}%n%f %{\e[5m%}%S>_%#%s %{\e[0m% '
@@ -43,7 +46,7 @@ RPROMPT='%U%2d%u $(git_super_status)'
 # spelling correction
 setopt CORRECT
 
-# don't redirect-overwrite files
+# don't redirect-overwrite files implicitly, use >! to force
 setopt NOCLOBBER
 
 if [ -x /usr/bin/dircolors ]; then
@@ -101,7 +104,6 @@ setopt NUMERIC_GLOB_SORT
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
-autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 bindkey "^[[A" history-beginning-search-backward-end
 

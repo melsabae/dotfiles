@@ -1,12 +1,26 @@
 [user]
 	name = Mohammad El-Sabae
 	email = mohammad.elsabae@gmail.com
+
 [core]
 	editor = vim
 	;autocrlf = input
-	;safecrlf = true
+	safecrlf = true
+	filemode = false
+
 [merge]
 	tool = vimdiff
+	conflictStyle = diff3
+
+[mergetool]
+	prompt = true
+
+[fetch]
+	recurseSubmodules = true
+
+[push]
+	default = current
+
 [color]
 	diff = auto
 	status = auto
