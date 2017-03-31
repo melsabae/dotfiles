@@ -12,7 +12,11 @@
         path: config/awesome
     ~/.gitconfig:
     ~/.git-prompt.bash:
+    ~/.config/htop/htoprc:
+        path: htoprc
     ~/.indent.pro:
+    ~/.config/locale.conf:
+        path: locale.conf
     ~/.tmux.conf:
     ~/.vim/autoload/plug.vim:
         path: plug.vim
@@ -23,6 +27,6 @@
     ~/.zshrc:
 
 - shell:
-  - mkdir -p ~/.vim/autoload
+  - mkdir -p ~/.vim/autoload ~/.config/htop
   - git submodule update
 
