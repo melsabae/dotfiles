@@ -3,3 +3,4 @@ command-history
 lib.pl
 playlist.pl
 search-history
+autosave

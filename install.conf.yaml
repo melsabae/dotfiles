@@ -19,6 +19,8 @@
     ~/.indent.pro:
     ~/.config/locale.conf:
         path: locale.conf
+    ~/.config/.pastebinit.xml:
+        path: pastebinit.xml
     ~/.tmux.conf:
     ~/.vim/autoload/plug.vim:
         path: plug.vim
