@@ -12,8 +12,8 @@
         path: config/awesome
     ~/.gitconfig:
     ~/.git-prompt.bash:
-    ~/.config/cmus/autosave:
-        path: autosave
+    ~/.config/cmus:
+        path: cmus
     ~/.config/htop/htoprc:
         path: htoprc
     ~/.indent.pro:
@@ -29,6 +29,6 @@
     ~/.zshrc:
 
 - shell:
-  - mkdir -p ~/.vim/autoload ~/.config/htop ~/.config/cmus
+  - mkdir -p ~/.vim/autoload ~/.config/htop
   - git submodule update
 
