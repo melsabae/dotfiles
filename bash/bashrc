@@ -140,8 +140,8 @@ shopt -s globstar
 export LESSHISTFILE=/dev/null
 
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > ~/.ssh-agent-thing
+    ssh-agent > ~/.ssh_agent_thing
 fi
 if [[ "$SSH_AGENT_PID" == "" ]]; then
-    eval "$(<~/.ssh-agent-thing)"
+    eval "$(<~/.ssh_agent_thing)"
 fi

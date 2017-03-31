@@ -3,7 +3,7 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config', '~/.vim/autoload']
+- clean: ['~', '~/.config']
 
 - link:
     ~/.bash_profile:
@@ -12,6 +12,8 @@
         path: bash/bashrc
     ~/.git-prompt.bash:
         path: bash/git-prompt.bash
+    ~/.bash_history:
+        path: bash/bash_history
 
     ~/.config/awesome:
         path: config/awesome
@@ -37,23 +39,40 @@
     ~/.tmux.conf:
         path: misc/tmux.conf
 
-    ~/.vim/autoload/plug.vim:
-        path: vim/plug.vim
     ~/.vimrc:
         path: vim/vimrc
+    ~/.vim:
+        path: vim
+
+    ~/.ssh_agent_thing:
+        path: misc/ssh_agent_thing
 
     ~/.xinitrc:
         path: x/xinitrc
     ~/.Xresources:
         path: x/Xresources
+    ~/.Xauthority:
+        path: x/Xauthority
 
     ~/.zprofile:
         path: zsh/zprofile
     ~/.zshrc:
         path: zsh/zshrc
+    ~/.zcompdump:
+        path: zsh/zcompdump
+    ~/.zsh_history:
+        path: zsh/zsh_history
+
+    ~/.vboxclient-clipboard.pid:
+        path: vbox/vboxclient-clipboard.pid
+    ~/.vboxclient-display.pid:
+        path: vbox/vboxclient-display.pid
+    ~/.vboxclient-seamless.pid:
+        path: vbox/vboxclient-seamless.pid
+    ~/.vboxclient-draganddrop.pid:
+        path: vbox/vboxclient-draganddrop.pid
 
 - shell:
   - mkdir -p ~/.config
-  - mkdir -p ~/.vim/autoload
   - git submodule update
 
