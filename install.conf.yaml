@@ -64,6 +64,8 @@
         path: zsh/zcompdump
     ~/.zsh_history:
         path: zsh/zsh_history
+    ~/.zkbd:
+        path: zsh/zkbd
 
     ~/.vboxclient-clipboard.pid:
         path: vbox/vboxclient-clipboard.pid
