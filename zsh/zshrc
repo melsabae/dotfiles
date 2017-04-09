@@ -40,6 +40,8 @@ source ~/.dotfiles/zsh-git-prompt/zshrc.sh
 # bold hostname, regular username, prompt and privilege
 PROMPT=$'%(?..[%F{red}%?%f] )%F{cyan}%B%m%b%f %F{yellow}%n%f %{\e[5m%}%S>_%#%s %{\e[0m% '
 
+GIT_PROMPT_EXECUTABLE=haskell
+ZSH_THEME_GIT_PROMPT_CACHE=y
 # up to 2 dirs, and status of git repo if available
 RPROMPT='%U%2d%u $(git_super_status)'
 
