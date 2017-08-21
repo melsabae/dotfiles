@@ -8,7 +8,7 @@
 -nce
 -ncdw
 -ss
--pcs
+-npcs
 -cs
 -saf
 -sai
