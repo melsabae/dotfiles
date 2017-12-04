@@ -13,7 +13,7 @@ URxvt.url-launcher: /usr/bin/qutebrowser
 URxvt.font: xft:Hack-Regular:size=15, \
 						xft:Envy Code R:size=19:style=Regular, \
 						xft:DejaVuSansMono:pixelsize=19:style=Regular
-URxvt.letterSpace: 0
+URxvt.letterSpace: -1
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true

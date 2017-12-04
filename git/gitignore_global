@@ -39,6 +39,7 @@ Thumbs.db
 # swap files
 *.swp
 *.swo
+*~
 
 # compiled stuff
 a.out
