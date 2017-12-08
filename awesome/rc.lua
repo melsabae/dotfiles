@@ -13,16 +13,16 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-battery = wibox.widget.textbox()    
+battery = wibox.widget.textbox()
 battery:set_font("Hack-Regular 19")
-batterytimer = timer({ timeout = 3 })    
-batterytimer:connect_signal("timeout",    
-function()    
-	percentage = assert(io.popen("acpi -b | cut -d, -f2 -", "r"))    
-	battery:set_text("[- " .. percentage:read("*l") .. " -]")    
-	percentage:close()    
-end    
-)    
+batterytimer = timer({ timeout = 3 })
+batterytimer:connect_signal("timeout",
+function()
+	percentage = assert(io.popen("acpi -b | cut -d, -f2 -", "r"))
+	battery:set_text("{- " .. percentage:read("*l") .. " -]")
+	percentage:close()
+end
+)
 batterytimer:start()
 
 -- {{{ Error handling
@@ -94,7 +94,7 @@ tags = {}
 for s = 1, screen.count() do
 	-- Each screen has its own tag table.
 	--tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-	tags[s] = awful.tag({ "1", "2", "3"}, s, layouts[1])
+	tags[s] = awful.tag({ "1", "2", "3", "4"}, s, layouts[1])
 end
 -- }}}
 
