@@ -13,3 +13,6 @@
 [submodule "zsh/omz_custom_themes/alien"]
 	path = zsh/omz_custom_themes/alien
 	url = https://github.com/eendroroy/alien.git
+[submodule "zsh/omz_custom_themes/alien-minimal"]
+	path = zsh/omz_custom_themes/alien-minimal
+	url = https://github.com/eendroroy/alien-minimal.git

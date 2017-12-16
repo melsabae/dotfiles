@@ -62,8 +62,6 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
 fi
 
 
-export USE_NERD_FONT=1
-
 #
 #
 
@@ -71,3 +69,4 @@ export USE_NERD_FONT=1
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
 
 #
+
