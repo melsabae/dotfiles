@@ -55,8 +55,6 @@
         path: zsh/zprofile
     ~/.zshrc:
         path: zsh/zshrc
-    ~/.zcompdump:
-        path: zsh/zcompdump
     ~/.zkbd:
         path: zsh/zkbd
 
