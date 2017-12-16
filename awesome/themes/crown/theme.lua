@@ -44,7 +44,7 @@ end
 --}}}
 
 -- {{{ Styles
-theme.font      = "Hack-Regular 19"
+theme.font      = "Hack-Regular 10"
 
 -- {{{ Colors
 

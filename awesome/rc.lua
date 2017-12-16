@@ -14,7 +14,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 battery = wibox.widget.textbox()
-battery:set_font("Hack-Regular 19")
+battery:set_font("Hack-Regular 12")
 batterytimer = timer({ timeout = 3 })
 batterytimer:connect_signal("timeout",
 function()
@@ -55,7 +55,7 @@ end
 beautiful.init("~/.config/awesome/themes/crown/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal = "kitty"
 browser = "qutebrowser"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
@@ -286,13 +286,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
 																-- Prompt
 																awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
-																awful.key({ modkey }, "x",
-																function ()
-																	awful.prompt.run({ prompt = "Run Lua code: " },
-																	mypromptbox[mouse.screen].widget,
-																	awful.util.eval, nil,
-																	awful.util.getdir("cache") .. "/history_eval")
-																end),
 																-- Menubar
 																awful.key({ modkey }, "p", function() menubar.show() end)
 																)
