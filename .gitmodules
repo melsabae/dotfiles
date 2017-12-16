@@ -10,3 +10,6 @@
 [submodule "fonts"]
 	path = misc/fonts
 	url = https://github.com/powerline/fonts.git
+[submodule "zsh/omz_custom_themes/alien"]
+	path = zsh/omz_custom_themes/alien
+	url = https://github.com/eendroroy/alien.git
