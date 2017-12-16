@@ -39,6 +39,9 @@
     ~/.tmux.conf:
         path: misc/tmux.conf
 
+    ~/.local/share/fonts:
+        path: misc/fonts
+
     ~/.vimrc:
         path: vim/vimrc
     ~/.vim:
@@ -51,6 +54,9 @@
 
     ~/.oh-my-zsh:
         path: zsh/oh-my-zsh
+    ~/.oh-my-zsh/custom/themes:
+        path: zsh/omz_custom_themes
+
     ~/.zprofile:
         path: zsh/zprofile
     ~/.zshrc:
@@ -60,4 +66,5 @@
 
 - shell:
   - git submodule update
+  - ~/.local/share/fonts/install.sh
 
