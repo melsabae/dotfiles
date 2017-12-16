@@ -153,3 +153,5 @@ alias reflector='sudo reflector --verbose --country "United States" -l 20 --sort
 alias pacup='sudo su -c "pacman -Syy; pacman -Syu; pacman -Scc"'
 alias top='htop'
 alias sudp='nocorrect sudo'
+
+bindkey '^R' history-incremental-search-backward
