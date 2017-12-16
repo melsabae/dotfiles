@@ -4,15 +4,9 @@
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "zsh/omz_custom_themes/powerlevel9k"]
-	path = zsh/omz_custom_themes/powerlevel9k
-	url = https://github.com/bhilburn/powerlevel9k.git
 [submodule "fonts"]
 	path = misc/fonts
 	url = https://github.com/powerline/fonts.git
-[submodule "zsh/omz_custom_themes/alien"]
-	path = zsh/omz_custom_themes/alien
-	url = https://github.com/eendroroy/alien.git
 [submodule "zsh/omz_custom_themes/alien-minimal"]
 	path = zsh/omz_custom_themes/alien-minimal
-	url = https://github.com/eendroroy/alien-minimal.git
+	url = git@github.com:melsabae/alien-minimal.git
