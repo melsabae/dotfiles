@@ -44,15 +44,10 @@
     ~/.vim:
         path: vim
 
-    ~/.ssh_agent_thing:
-        path: misc/ssh_agent_thing
-
     ~/.xinitrc:
         path: x/xinitrc
     ~/.Xresources:
         path: x/Xresources
-    ~/.Xauthority:
-        path: x/Xauthority
 
     ~/.zprofile:
         path: zsh/zprofile

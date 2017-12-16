@@ -1,9 +1,11 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-source ~/.git-prompt.bash
+#
+# ~/.bashrc
+#
 
 # If not running interactively, don't do anything
+
+source ~/.git-prompt.bash
+
 case $- in
     *i*) ;;
       *) return;;
@@ -142,6 +144,8 @@ export LESSHISTFILE=/dev/null
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent > ~/.ssh_agent_thing
 fi
+
 if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh_agent_thing)"
 fi
+[[ $- != *i* ]] && return
