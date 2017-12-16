@@ -49,6 +49,8 @@
     ~/.Xresources:
         path: x/Xresources
 
+    ~/.oh-my-zsh:
+        path: zsh/oh-my-zsh
     ~/.zprofile:
         path: zsh/zprofile
     ~/.zshrc:
