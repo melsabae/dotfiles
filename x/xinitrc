@@ -40,4 +40,6 @@ fi
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 VBoxClient-all
+#sxhkd &
+#exec bspwm
 exec awesome
