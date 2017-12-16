@@ -9,18 +9,9 @@ URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 URxvt.matcher.button: 3
 URxvt.url-launcher: /usr/bin/qutebrowser
 
-
-URxvt.font: xft:Hack-Regular:size=16, \
-						xft:DejaVuSansMono:pixelsize=19:style=Regular
-URxvt.letterSpace: -1
-Xft.dpi: 96
-Xft.antialias: true
-Xft.hinting: true
-Xft.hintstyle: hintslight
-Xft.rgba: rgba
-Xft.lcdfilter: lcddefault
-Xft.autohint: true
-
+URxvt.font: xft:Hack:style=Regular:size=9, \
+						xft:DejaVu Sans Mono for Powerline:style=Regular, \
+						xft:Meslo LG S for Powerline:style=Regular
 
 ! terminal.sexy -> jmbi theme
 ! special

@@ -7,6 +7,6 @@
 [submodule "zsh/omz_custom_themes/powerlevel9k"]
 	path = zsh/omz_custom_themes/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
-[submodule "misc/fonts"]
+[submodule "fonts"]
 	path = misc/fonts
 	url = https://github.com/powerline/fonts.git

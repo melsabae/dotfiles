@@ -95,6 +95,7 @@ call plug#end()
 "vim airline status bar
 set laststatus=2
 let g:airline_theme='raven'
+let g:airline_powerline_fonts = 1
 
 
 " YCM options
