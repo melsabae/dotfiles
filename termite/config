@@ -3,7 +3,7 @@
 #audible_bell = false
 #clickable_url = true
 #dynamic_title = true
-font = Hack 9
+font = Hack 16
 #fullscreen = true
 #geometry = 640x480
 #icon_name = terminal
