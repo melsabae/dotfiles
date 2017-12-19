@@ -13,9 +13,6 @@
     ~/.git-prompt.bash:
         path: bash/git-prompt.bash
 
-    ~/.config/awesome:
-        path: awesome
-
     ~/.gitconfig:
         path: git/gitconfig
     ~/.gitignore_global:
@@ -62,7 +59,10 @@
         path: zsh/zkbd
 
     ~/.config/i3:
-        path: i3
+        path: i3/i3
+
+    ~/.config/i3status:
+        path: i3/i3status
 
     ~/.config/termite:
         path: termite
