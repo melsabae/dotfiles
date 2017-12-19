@@ -10,9 +10,9 @@ URxvt.matcher.button: 3
 URxvt.url-launcher: /usr/bin/qutebrowser
 
 URxvt.font: xft:Hack:style=Regular:size=9, \
-						xft:Inconsolata for Powerline:style=Regular:size=9, \
 						xft:DejaVu Sans Mono for Powerline:style=Regular, \
-						xft:Meslo LG S for Powerline:style=Regular
+						xft:Meslo LG S for Powerline:style=Regular, \
+						xft:Inconsolata for Powerline:style=Regular
 
 ! terminal.sexy -> jmbi theme
 ! special

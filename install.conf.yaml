@@ -61,6 +61,12 @@
     ~/.zkbd:
         path: zsh/zkbd
 
+    ~/.config/i3:
+        path: i3
+
+    ~/.config/termite:
+        path: termite
+
 - shell:
   - git submodule update --recursive --init
 
