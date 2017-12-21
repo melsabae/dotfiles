@@ -113,6 +113,10 @@ nmap yr :YRShow<CR>
 nmap gu :GundoToggle<CR>
 set pastetoggle=<F2>
 set viminfo=
+set tags+=tags
+set tags+=.tags
+set tags+=../tags
+set tags+=../.tags
 
 autocmd BufWritePre * %s/\s\+$//e
 
