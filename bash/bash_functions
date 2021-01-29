@@ -29,14 +29,14 @@ function ps1_branch_color {
 
     local status=$(git ls 2>/dev/null) || return 0
 
-    if [[ "$status" =~ "^M" ]]; then
+    if [[ $status =~ ^\ M ]]; then
         local color="\e[0;30;41m"
-    elif [[ "$status" =~ "^??" ]]; then
+    elif [[ $status =~ ^\?\? ]]; then
         local color="\e[0;30;43m"
-    elif [[ "$status" =~ "^A" ]]; then
+    elif [[ $status =~ ^A ]]; then
         local color="\e[0;30;42m"
     else
-        local color="\e[0;34;40m"
+        local color="\e[1;37;40m"
     fi
 
     echo " $color$branch"
