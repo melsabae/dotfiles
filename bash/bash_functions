@@ -13,21 +13,33 @@ function ps1_hostname {
 }
 
 function ps1_branch {
-    local branch=$(git branch 2>&1)
-
-    if [[ "$branch" =~ "fatal" ]]; then
-        echo ""
-    elif [[ "$branch" = "" ]]; then
-        echo " $(git status | cut -f3 -d' ' | head -1)"
-    else
-        echo " $(git br)"  # this is dependent on my gitconfig
-    fi
+    # guard against not being in a repo
+    local status="$(git status | head -1 | cut -f3 -d' ')" || return 0
+    echo $status
 }
 
 function ps1_branch_color {
-    local color="\e[1;31;40m"
-    local branch="$(ps1_branch)"
-    echo "$color$branch"
+    # dependent on my gitconfig
+    local branch=$(ps1_branch)
+
+    if [[ "$branch" = "" ]]; then
+        echo ""
+        return 0
+    fi
+
+    local status=$(git ls 2>/dev/null) || return 0
+
+    if [[ "$status" =~ "^M" ]]; then
+        local color="\e[0;30;41m"
+    elif [[ "$status" =~ "^??" ]]; then
+        local color="\e[0;30;43m"
+    elif [[ "$status" =~ "^A" ]]; then
+        local color="\e[0;30;42m"
+    else
+        local color="\e[0;34;40m"
+    fi
+
+    echo " $color$branch"
 }
 
 function ps1_error {
