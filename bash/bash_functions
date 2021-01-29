@@ -39,6 +39,10 @@ function ps1_branch_color {
     elif [[ $status =~ "Changes to be committed" ]]; then
         local color="\e[0;30;42m"
 
+
+    elif [[ $status =~ "git push" || $status =~ "git pull" ]]; then
+        local color="\e[0;30;47m"
+
     # clean head
     else
         local color="\e[1;37;40m"
