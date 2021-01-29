@@ -67,7 +67,7 @@ function ps1_generator {
     if [ "$errnum" = "0" ]; then
         local err="$reset"
     else
-        local err="$errnum "
+        local err="\e[0;30;41m$errnum$reset "
     fi
 
     PS1="$hostname{$dir$branch} $date $err"
