@@ -8,11 +8,20 @@ function ps1_dir {
 }
 
 function ps1_hostname {
+    # currently, the machines this runs on does not need a transformation
     hostname
 }
 
 function ps1_branch {
-    echo "asdf"
+    local branch=$(git branch 2>&1)
+
+    if [[ "$branch" =~ "fatal" ]]; then
+        echo ""
+    elif [[ "$branch" = "" ]]; then
+        echo " TODO"
+    else
+        echo " $(git br)"
+    fi
 }
 
 function ps1_branch_color {
@@ -40,6 +49,6 @@ function ps1_generator {
         local err="$errnum "
     fi
 
-    PS1="$hostname{$dir $branch} $date $err"
+    PS1="$hostname{$dir$branch} $date $err"
 }
 
