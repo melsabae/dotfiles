@@ -21,55 +21,49 @@ if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " remember place
 endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-syntax on
 
-set t_Co=256 "256 color mode
-set colorcolumn=80
-hi Folded ctermfg=black
+" strip trailing whitespace when saving
+autocmd BufWritePre * %s/\s\+$//e
+
+
+"colorscheme solarized
+
+
+filetype plugin indent on
+syntax enable
+
+
 set number "set all line numbers
 set relativenumber "lines relatively numbered from current
-"set cursorline "cursor tracking"
-"set cursorcolumn " cursor tracking"
-"set background=dark
-"colorscheme default
-"set ruler
-"set wrap
-"set showbreak=...
-"set showcmd		" Show (partial) command in status line.
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set showmatch		" Show matching brackets.
 set hlsearch
-
-set autoindent
-set tabstop=2 "heresy
-set softtabstop=2
-set shiftwidth=2
-"set expandtab
-set shiftround
-set smarttab "tabs at the beginning, spaces in the not beginning of a line
-
 set ignorecase		" Do case insensitive matching
-set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-set autoread
-set scrolloff=50 "scroll follows cursor
+set smartcase
+set scrolloff=50
+set history=1000
+set mouse=c
 set lazyredraw
 set ttyfast
-"set omnifunc=no
-
-" code folding options
-set foldenable
-set foldmethod=syntax "indent"
-set foldlevelstart=10
-"set foldnestmax=10
-set foldlevel=1
-
-"let &titlestring = "{" .hostname(). ": vim(" .expand("%:p"). ")}".expand($USER).""
-"set title
-
-"autocomplete menu options
+set foldmethod=syntax
+set backspace=indent,eol,start
+set clipboard=unnamedplus
+set autoindent
+set smartindent
+set pastetoggle=<F2>
+set shiftround
+set incsearch		" Incremental search
+set viminfo+=n~/.vim/viminfo
+set tags+=./tags;
 set completeopt=menuone,preview
+"set colorcolumn=80
+
+
+hi Folded ctermfg=black
+hi CursorLine ctermbg=16
+hi CursorColumn ctermfg=9 ctermbg=17
 
 
 "vim-plug calls
@@ -98,12 +92,6 @@ let g:airline_theme='raven'
 let g:airline_powerline_fonts = 1
 
 
-" YCM options
-let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
-
 "yankring options
 let g:yankring_history_dir = '~/.vim/plugged/YankRing.vim'
 
@@ -111,12 +99,9 @@ nmap tb :TagbarOpen fj<CR>
 nmap ttb :TagbarToggle<CR>
 nmap yr :YRShow<CR>
 nmap gu :GundoToggle<CR>
-set pastetoggle=<F2>
-set viminfo=
-set tags+=tags
-set tags+=.tags
-set tags+=../tags
-set tags+=../.tags
 
-autocmd BufWritePre * %s/\s\+$//e
+
+" J and K insert newlines above and below
+nnoremap <C-J> o<Esc>
+nnoremap <C-K> O<Esc>
 
