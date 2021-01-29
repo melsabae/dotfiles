@@ -13,7 +13,7 @@ function ps1_hostname {
 }
 
 function ps1_branch {
-    local branch=$(git status 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev) || return 0
+    local branch=$(git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev) || return 0
     echo $branch
 }
 
