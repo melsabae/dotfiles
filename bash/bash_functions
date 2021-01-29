@@ -13,9 +13,8 @@ function ps1_hostname {
 }
 
 function ps1_branch {
-    # guard against not being in a repo
-    local status="$(git status 2>/dev/null | head -1 | cut -f3 -d' ')" || return 0
-    echo $status
+    local branch=$(git status 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev) || return 0
+    echo $branch
 }
 
 function ps1_branch_color {
