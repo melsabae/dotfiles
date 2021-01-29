@@ -3,7 +3,8 @@ function ps1_date {
 }
 
 function ps1_dir {
-    pwd
+    local depth=2
+    python -c "print(\"/\".join(\"$PWD\".split(\"/\")[-$depth:]))"
 }
 
 function ps1_hostname {
@@ -28,17 +29,15 @@ function ps1_generator {
     local reset="\e[0m"
     local errnum="$?"
 
-
     local hostname="\e[2;37;40m$(ps1_hostname)$reset"
     local dir="\e[0;34;40m$(ps1_dir)$reset"
     local branch="$(ps1_branch_color)$reset"
     local date="\e[2;37;40m$(ps1_date)$reset"
 
-
     if [ "$errnum" = "0" ]; then
         local err="$reset"
     else
-        local err="$errnum$reset "
+        local err="$errnum "
     fi
 
     PS1="$hostname{$dir $branch} $date $err"
