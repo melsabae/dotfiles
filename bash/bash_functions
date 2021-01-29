@@ -18,9 +18,9 @@ function ps1_branch {
     if [[ "$branch" =~ "fatal" ]]; then
         echo ""
     elif [[ "$branch" = "" ]]; then
-        echo " TODO"
+        echo " $(git status | cut -f3 -d' ' | head -1)"
     else
-        echo " $(git br)"
+        echo " $(git br)"  # this is dependent on my gitconfig
     fi
 }
 
