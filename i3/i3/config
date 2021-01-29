@@ -30,7 +30,7 @@ font pango:Hack 16
 #floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -168,7 +168,7 @@ client.focused_inactive #000000 #000000 #000000 #000000 #000000
 
 hide_edge_borders smart
 
-for_window [class="Termite"] border pixel 2
+for_window [class="alacritty"] border pixel 2
 for_window [class="qutebrowser"] border pixel 2
 
-exec termite
+exec alacritty
