@@ -26,17 +26,19 @@ function ps1_branch_color {
         return 0
     fi
 
-    local status=$(git ls 2>/dev/null) || return 0
+    local status=$(git status)
 
-    # there exists an unstaged modification to a tracked file
-    if [[ $status =~ ^\ M || $status =~ ^MM ]]; then
-        local color="\e[0;30;41m"
-    # there is an untracked file present that is not in the .gitignore
-    elif [[ $status =~ ^\?\? ]]; then
+    if [[ $status =~ "not staged" ]];  then
         local color="\e[0;30;43m"
+
+    # there is an untracked file present that is not in the .gitignore
+    elif [[ $status =~ "Untracked files" ]]; then
+        local color="\e[0;30;44m"
+
     # all tracked files with modifications are staged
-    elif [[ $status =~ ^A || $status =~ ^M ]]; then
+    elif [[ $status =~ "Changes to be committed" ]]; then
         local color="\e[0;30;42m"
+
     # clean head
     else
         local color="\e[1;37;40m"
@@ -50,8 +52,8 @@ function ps1_error {
 }
 
 function ps1_generator {
-    local reset="\e[0m"
     local errnum="$?"
+    local reset="\e[0m"
 
     local hostname="\e[2;37;40m$(ps1_hostname)$reset"
     local dir="\e[0;34;40m$(ps1_dir)$reset"
