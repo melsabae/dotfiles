@@ -6,6 +6,7 @@
 - clean: ['~', '~/.config']
 
 - link:
+    # directories in this repo root that need to be linked
     ~/.config/bash:
         path: bash
     ~/.config/cmus:
@@ -21,18 +22,24 @@
     ~/.vim:
         path: vim
 
+    # files in this repo root that need to be linked
+    ~/.config/dircolors:
+        path: dircolors
+    ~/.config/inputrc:
+        path: inputrc
+    ~/.config/locale.conf:
+        path: locale.conf
+    ~/.config/tmux.conf:
+        path: tmux.conf
+    ~/.config/.pastebinit.xml:
+        path: misc/pastebinit.xml
+
+
+    # files in a subdir in this repo that need to be linked
     ~/.bash_profile:
         path: bash/bash_profile
     ~/.bashrc:
         path: bash/bashrc
-    ~/.config/locale.conf:
-        path: locale.conf
-    ~/.config/.pastebinit.xml:
-        path: misc/pastebinit.xml
-    ~/.config/tmux.conf:
-        path: tmux.conf
-    ~/.config/inputrc:
-        path: inputrc
 
 
 - shell:
