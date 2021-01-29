@@ -1,0 +1,9 @@
+# do not bell on tab-completion
+#set bell-style none
+
+set meta-flag on
+set input-meta on
+set convert-meta off
+set output-meta on
+
+"\C-l": clear-screen
