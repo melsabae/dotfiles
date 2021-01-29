@@ -1,39 +1,28 @@
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim
+	eol = lf
+	excludesfile = ~/.config/git/gitignore
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	br = rev-parse --abbrev-ref HEAD
+	hist = log --pretty=oneline
+	diffw = diff -w
+	ls = status -s
+	graph = log --decorate=full --graph
+	cf = diff-tree --no-commit-id --name-only -r
+	root = rev-parse --show-toplevel
+	clsf = diff-tree --no-commit-id --name-status -r
+[mergetool]
+	prompt = false
 [user]
 	name = Mohammad El-Sabae
 	email = mohammad.elsabae@gmail.com
-
-[core]
-	editor = vim
-	;autocrlf = input
-	safecrlf = true
-	filemode = false
-	excludesfile = ~/.gitignore_global
-
-[merge]
-	tool = vimdiff
-	conflictStyle = diff3
-
-[mergetool]
-	prompt = true
-
 [fetch]
 	recurseSubmodules = true
-
 [push]
 	default = current
-
-[color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
-	pager = true
-	ui = auto
-
-[alias]
-	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
