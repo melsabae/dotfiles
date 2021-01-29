@@ -6,66 +6,34 @@
 - clean: ['~', '~/.config']
 
 - link:
+    ~/.config/bash:
+        path: bash
+    ~/.config/cmus:
+        path: cmus
+    ~/.config/formatting:
+        path: formatting
+    ~/.config/git:
+        path: git
+    ~/.config/termite:
+        path: termite
+    ~/.config/trizen:
+        path: trizen
+    ~/.vim:
+        path: vim
+
     ~/.bash_profile:
         path: bash/bash_profile
     ~/.bashrc:
         path: bash/bashrc
-    ~/.git-prompt.bash:
-        path: bash/git-prompt.bash
-
-    ~/.gitconfig:
-        path: git/gitconfig
-    ~/.gitignore_global:
-        path: git/gitignore_global
-
-    ~/.config/cmus:
-        path: cmus
-
-    ~/.config/htop:
-        path: htop
-
-    ~/.indent.pro:
-        path: misc/indent.pro
-
     ~/.config/locale.conf:
-        path: misc/locale.conf
-
+        path: locale.conf
     ~/.config/.pastebinit.xml:
         path: misc/pastebinit.xml
+    ~/.config/tmux.conf:
+        path: tmux.conf
+    ~/.config/inputrc:
+        path: inputrc
 
-    ~/.tmux.conf:
-        path: misc/tmux.conf
-
-    ~/.vimrc:
-        path: vim/vimrc
-    ~/.vim:
-        path: vim
-
-    ~/.xinitrc:
-        path: x/xinitrc
-    ~/.Xresources:
-        path: x/Xresources
-
-    ~/.oh-my-zsh:
-        path: zsh/oh-my-zsh
-    ~/.oh-my-zsh/custom/themes:
-        path: zsh/omz_custom_themes
-
-    ~/.zprofile:
-        path: zsh/zprofile
-    ~/.zshrc:
-        path: zsh/zshrc
-    ~/.zkbd:
-        path: zsh/zkbd
-
-    ~/.config/i3:
-        path: i3/i3
-
-    ~/.config/i3status:
-        path: i3/i3status
-
-    ~/.config/termite:
-        path: termite
 
 - shell:
   - git submodule update --recursive --init
