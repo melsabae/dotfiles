@@ -14,3 +14,5 @@ readonly PROMPT_COMMAND=ps1_generator
 # CDPATH="path/to/thing" would make cd dir work for the path path/to/things/dir
 readonly CDPATH=
 
+
+readonly PATH=$HOME/bin:$PATH

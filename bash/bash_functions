@@ -1,3 +1,7 @@
+function ps1_date {
+    date +%H:%M:%S
+}
+
 function ps1_dir {
     pwd
 }
@@ -10,19 +14,33 @@ function ps1_branch {
     echo "asdf"
 }
 
+function ps1_branch_color {
+    local color="\e[1;31;40m"
+    local branch="$(ps1_branch)"
+    echo "$color$branch"
+}
+
 function ps1_error {
     echo "$?"
 }
 
 function ps1_generator {
+    local reset="\e[0m"
     local errnum="$?"
 
+
+    local hostname="\e[2;37;40m$(ps1_hostname)$reset"
+    local dir="\e[0;34;40m$(ps1_dir)$reset"
+    local branch="$(ps1_branch_color)$reset"
+    local date="\e[2;37;40m$(ps1_date)$reset"
+
+
     if [ "$errnum" = "0" ]; then
-        local err=""
+        local err="$reset"
     else
-        local err="$errnum "
+        local err="$errnum$reset "
     fi
 
-    PS1="$(ps1_hostname) $(ps1_dir) $(ps1_branch) $err"
+    PS1="$hostname{$dir $branch} $date $err"
 }
 

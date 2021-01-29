@@ -22,3 +22,5 @@ alias py='python'
 alias top='htop'
 
 alias tmux='tmux -f ~/.config/tmux.conf'
+
+alias cal="cal -3"
