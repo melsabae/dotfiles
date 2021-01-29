@@ -1,0 +1,10 @@
+readonly LESSHISTFILE=/dev/null
+readonly INPUTRC=$HOME/.config/inputrc
+readonly INDENT_PROFILE=$HOME/.config/formatting/indent.pro
+readonly ARTISTIC_STYLE_PROFILE=$HOME/.config/formatting/astylerc
+
+
+export LESSHISTFILE
+export INPUTRC
+export INDENT_PROFILE
+export ARTISTIC_STYLE_PROFILE

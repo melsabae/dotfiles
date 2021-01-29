@@ -1,0 +1,24 @@
+alias ls='ls --color=auto'
+alias sl='ls'
+alias ll='ls -l'
+alias lll='ls -al'
+alias lsl='ls -1 | wc -l'
+alias lst='ll -t'
+
+# color output even through pipes
+alias grep='grep --color=auto'
+alias ngrep='grep -n'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+# less strips color sometimes
+alias less='less -R'
+
+alias vim.tiny='vim'
+alias vi='vim'
+alias vm='vim'
+alias im='vim'
+alias pythong='py'
+alias py='python'
+alias top='htop'
+
+alias tmux='tmux -f ~/.config/tmux.conf'

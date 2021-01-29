@@ -1,0 +1,16 @@
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+readonly HISTSIZE=1000
+readonly HISTFILESIZE=2000
+
+
+# do not tab complete *.swp, *.swo, *.out, the .git directory
+readonly FIGNORE=swp:swo:out:git
+
+
+readonly PROMPT_COMMAND=ps1_generator
+
+
+# like $PATH for cd, but automatically fills out path prefixes
+# CDPATH="path/to/thing" would make cd dir work for the path path/to/things/dir
+readonly CDPATH=
+

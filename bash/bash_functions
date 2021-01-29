@@ -1,0 +1,28 @@
+function ps1_dir {
+    pwd
+}
+
+function ps1_hostname {
+    hostname
+}
+
+function ps1_branch {
+    echo "asdf"
+}
+
+function ps1_error {
+    echo "$?"
+}
+
+function ps1_generator {
+    local errnum="$?"
+
+    if [ "$errnum" = "0" ]; then
+        local err=""
+    else
+        local err="$errnum "
+    fi
+
+    PS1="$(ps1_hostname) $(ps1_dir) $(ps1_branch) $err"
+}
+
