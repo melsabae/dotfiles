@@ -29,7 +29,6 @@ autocmd BufWritePre * %s/\s\+$//e
 "colorscheme solarized
 
 
-filetype plugin indent on
 syntax enable
 
 
@@ -66,42 +65,42 @@ hi CursorLine ctermbg=16
 hi CursorColumn ctermfg=9 ctermbg=17
 
 
-"vim-plug calls
-call plug#begin()
-Plug 'https://github.com/scrooloose/syntastic.git'
-Plug 'https://github.com/vim-airline/vim-airline.git'
-Plug 'https://github.com/jiangmiao/auto-pairs.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'https://github.com/majutsushi/tagbar.git'
-Plug 'https://github.com/vim-scripts/YankRing.vim.git'
-Plug 'https://github.com/joequery/Stupid-EasyMotion.git'
-Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/scrooloose/nerdcommenter.git'
-Plug 'https://github.com/sjl/gundo.vim.git'
-Plug 'https://github.com/nathanaelkane/vim-indent-guides.git'
-Plug 'https://github.com/vim-airline/vim-airline-themes.git'
-Plug 'https://github.com/henrik/vim-markdown-preview'
-Plug 'https://github.com/jeaye/color_coded.git'
-Plug 'https://github.com/airblade/vim-gitgutter'
-call plug#end()
-
-"vim airline status bar
-set laststatus=2
-let g:airline_theme='raven'
-let g:airline_powerline_fonts = 1
-
-
-"yankring options
-let g:yankring_history_dir = '~/.vim/plugged/YankRing.vim'
-
-nmap tb :TagbarOpen fj<CR>
-nmap ttb :TagbarToggle<CR>
-nmap yr :YRShow<CR>
-nmap gu :GundoToggle<CR>
-
-
 " J and K insert newlines above and below
 nnoremap <C-J> o<Esc>
 nnoremap <C-K> O<Esc>
+
+
+""vim-plug calls
+"call plug#begin()
+"Plug 'https://github.com/scrooloose/syntastic.git'
+"Plug 'https://github.com/vim-airline/vim-airline.git'
+"Plug 'https://github.com/jiangmiao/auto-pairs.git'
+"Plug 'https://github.com/tpope/vim-fugitive.git'
+"Plug 'https://github.com/scrooloose/nerdtree.git'
+"Plug 'https://github.com/majutsushi/tagbar.git'
+"Plug 'https://github.com/vim-scripts/YankRing.vim.git'
+"Plug 'https://github.com/joequery/Stupid-EasyMotion.git'
+"Plug 'https://github.com/godlygeek/tabular.git'
+"Plug 'https://github.com/scrooloose/nerdcommenter.git'
+"Plug 'https://github.com/sjl/gundo.vim.git'
+"Plug 'https://github.com/nathanaelkane/vim-indent-guides.git'
+"Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+"Plug 'https://github.com/henrik/vim-markdown-preview'
+"Plug 'https://github.com/jeaye/color_coded.git'
+"Plug 'https://github.com/airblade/vim-gitgutter'
+"call plug#end()
+"
+""vim airline status bar
+"set laststatus=2
+"let g:airline_theme='raven'
+"let g:airline_powerline_fonts = 1
+"
+"
+""yankring options
+"let g:yankring_history_dir = '~/.vim/plugged/YankRing.vim'
+"
+"nmap tb :TagbarOpen fj<CR>
+"nmap ttb :TagbarToggle<CR>
+"nmap yr :YRShow<CR>
+"nmap gu :GundoToggle<CR>
 
