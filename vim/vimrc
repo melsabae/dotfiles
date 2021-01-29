@@ -55,7 +55,7 @@ set pastetoggle=<F2>
 set shiftround
 set incsearch		" Incremental search
 set viminfo+=n~/.vim/viminfo
-set tags+=./tags;
+set tags=./tags;$HOME
 set completeopt=menuone,preview
 "set colorcolumn=80
 
