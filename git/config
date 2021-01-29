@@ -23,7 +23,7 @@
 	name = Mohammad El-Sabae
 	email = mohammad.elsabae@gmail.com
 [fetch]
-	recurseSubmodules = true
+	recurseSubmodules = false
 [push]
 	default = current
 [pull]
