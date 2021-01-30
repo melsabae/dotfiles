@@ -1,8 +1,8 @@
-reset="\\[$(tput sgr0)\\]"
-hostname_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
-dir_color="\\[$(tput sgr0)\\[$(tput setaf 4)\\[$(tput setab 0)\\]"
-dates_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
-err_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 1)\\]"
+ps1_reset="\\[$(tput sgr0)\\]"
+ps1_hostname_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
+ps1_dir_color="\\[$(tput sgr0)\\[$(tput setaf 4)\\[$(tput setab 0)\\]"
+ps1_date_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
+ps1_err_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 1)\\]"
 
 function ps1_date {
     echo -n $(date +%H:%M:%S)
@@ -35,40 +35,40 @@ function ps1_branch_color {
     local status=$(git status)
 
     if [[ $status =~ "not staged" ]];  then
-        local color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 3)\\]"
+        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 3)\\]"
 
     # there is an untracked file present that is not in the .gitignore
     elif [[ $status =~ "Untracked files" ]]; then
-        local color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 4)\\]"
+        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 4)\\]"
 
     # all tracked files with modifications are staged
     elif [[ $status =~ "Changes to be committed" ]]; then
-        local color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 2)\\]"
+        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 2)\\]"
 
     # not in sync with remote
     elif [[ $status =~ "git push" || $status =~ "git pull" ]]; then
-        local color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 7)\\]"
+        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 7)\\]"
 
     # clean head
     else
-        local color="\\[$(tput bold)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
+        local ps1_branch_color="\\[$(tput bold)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
     fi
 
-    echo -n " $color$branch"
+    echo -n " $ps1_branch_color$branch"
 }
 
 function ps1_generator {
     local ps1_err_num="$?"
 
-    local ps1_hostname="$hostname_color$(ps1_hostname)$reset"
-    local ps1_dir="$dir_color$(ps1_dir)$reset"
-    local ps1_branch="$(ps1_branch_color)$reset"
-    local ps1_date="$dates_color$(ps1_date)$reset"
+    local ps1_hostname="$ps1_hostname_color$(ps1_hostname)$ps1_reset"
+    local ps1_dir="$ps1_dir_color$(ps1_dir)$ps1_reset"
+    local ps1_branch="$(ps1_branch_color)$ps1_reset"
+    local ps1_date="$ps1_date_color$(ps1_date)$ps1_reset"
 
     if [ "$ps1_err_num" = "0" ]; then
-        local ps1_err="$reset"
+        local ps1_err="$ps1_reset"
     else
-        local ps1_err="$err_color$ps1_err_num$reset "
+        local ps1_err="$ps1_err_color$ps1_err_num$ps1_reset "
     fi
 
     PS1="$ps1_hostname{$ps1_dir$ps1_branch} $ps1_date $ps1_err"
