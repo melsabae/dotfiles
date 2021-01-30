@@ -3,8 +3,8 @@ readonly HISTSIZE=1000
 readonly HISTFILESIZE=2000
 
 
-# do not tab complete *.swp, *.swo, *.out, the .git directory
-readonly FIGNORE=swp:swo:out:git
+# do not tab complete *.swp, *.swo, the .git directory
+readonly FIGNORE=swp:swo:git
 
 
 readonly PROMPT_COMMAND=ps1_generator
