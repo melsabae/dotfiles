@@ -29,23 +29,23 @@ function ps1_branch_color {
     local status=$(git status)
 
     if [[ $status =~ "not staged" ]];  then
-        local color="\e[0;30;43m"
+        local color="$(tput sgr0)$(tput setaf 0)$(tput setab 3)"
 
     # there is an untracked file present that is not in the .gitignore
     elif [[ $status =~ "Untracked files" ]]; then
-        local color="\e[0;30;44m"
+        local color="$(tput sgr0)$(tput setaf 0)$(tput setab 4)"
 
     # all tracked files with modifications are staged
     elif [[ $status =~ "Changes to be committed" ]]; then
-        local color="\e[0;30;42m"
+        local color="$(tput sgr0)$(tput setaf 0)$(tput setab 2)"
 
     # not in sync with remote
     elif [[ $status =~ "git push" || $status =~ "git pull" ]]; then
-        local color="\e[0;30;47m"
+        local color="$(tput sgr0)$(tput setaf 0)$(tput setab 7)"
 
     # clean head
     else
-        local color="\e[1;37;40m"
+        local color="$(tput bold)$(tput setaf 7)$(tput setab 0)"
     fi
 
     echo " $color$branch"
@@ -57,7 +57,7 @@ function ps1_error {
 
 function ps1_generator {
     local errnum="$?"
-    local reset="\e[0m"
+    local reset="$(tput sgr0)"
 
     local hostname="\e[2;37;40m$(ps1_hostname)$reset"
     local dir="\e[0;34;40m$(ps1_dir)$reset"
