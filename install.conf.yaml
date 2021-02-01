@@ -19,8 +19,6 @@
         path: kitty
     ~/.config/termite:
         path: termite
-    ~/.config/trizen:
-        path: trizen
     ~/.vim:
         path: vim
 
