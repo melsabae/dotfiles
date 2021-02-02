@@ -23,7 +23,7 @@ function ps1_hostname {
 
 function ps1_branch {
     # function is guarded by the color prompt, so it assumes git is installed
-    git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev
+    (git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev) 2>/dev/null || return 0
 }
 
 function ps1_branch_color {
