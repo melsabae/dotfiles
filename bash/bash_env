@@ -5,8 +5,8 @@ rsync_proxy=$https_proxy
 
 
 function readonly_export {
-    export $1=$2
-    readonly $1
+    readonly $1=$2
+    export $1
 }
 
 
