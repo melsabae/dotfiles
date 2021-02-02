@@ -30,10 +30,9 @@ function ps1_branch_color {
     which git 2>&1 > /dev/null || return 0
 
     # dependent on my gitconfig
-    local branch=$(ps1_branch)
+    local ps1_branch_name=$(ps1_branch)
 
-    if [[ "$branch" = "" ]]; then
-        echo -n ""
+    if [[ "$ps1_branch_name" = "" ]]; then
         return 0
     fi
 
@@ -59,7 +58,7 @@ function ps1_branch_color {
         local ps1_branch_color="\\[$(tput bold)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
     fi
 
-    echo -n " $ps1_branch_color$branch"
+    echo -n " $ps1_branch_color$ps1_branch_name"
 }
 
 function ps1_generator {
