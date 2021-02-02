@@ -69,6 +69,9 @@ hi CursorColumn ctermfg=9 ctermbg=17
 nnoremap <C-J> o<Esc>
 nnoremap <C-K> O<Esc>
 
+" <Leader>c turns on cursor tracking
+nnoremap <Leader>c :set cursorcolumn! cursorline!<CR>
+
 
 ""vim-plug calls
 "call plug#begin()

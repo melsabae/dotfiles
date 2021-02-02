@@ -21,6 +21,8 @@
         path: termite
     ~/.vim:
         path: vim
+    ~/.config/alacritty:
+        path: alacritty
 
     # files in this repo root that need to be linked
     ~/.config/dircolors:
