@@ -14,12 +14,15 @@ function ps1_dir {
 }
 
 function ps1_hostname {
+    # arch uses hostnamectl but some of my installs have hostname
+    # don't figure it out, let the shell variable exist
+    # and if it doesn't, we solve it then
     echo -n "$HOSTNAME"
 }
 
 function ps1_branch {
     # function is guarded by the color prompt, so it assumes git is installed
-    (git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev) 2>/dev/null || return 0
+    git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev
 }
 
 function ps1_branch_color {
