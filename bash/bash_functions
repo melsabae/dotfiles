@@ -6,15 +6,11 @@ ps1_date_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
 ps1_err_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 1)\\]"
 
 function ps1_date {
-    which date 2>&1 >/dev/null \
-        && date +%H:%M:%S \
-        || return 0
+    date +%H:%M:%S
 }
 
 function ps1_dir {
-    which python 2>&1 >/dev/null \
-        && python -c "print(\"/\".join(\"$PWD\".split(\"/\")[-$ps1_dir_depth:]))" \
-        || echo -n "$PWD"
+    pwd | rev | cut -f-2 -d'/' | rev
 }
 
 function ps1_hostname {
