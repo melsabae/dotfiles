@@ -15,4 +15,6 @@ readonly PROMPT_COMMAND=ps1_generator
 readonly CDPATH=
 
 
-readonly PATH=$HOME/bin:$PATH
+# cannot use readonly otherwise it breaks sudo
+export PATH=$HOME/bin:$PATH
+
