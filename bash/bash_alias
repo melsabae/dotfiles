@@ -22,5 +22,6 @@ alias py='python'
 alias top='htop'
 
 alias tmux='tmux -f ~/.config/tmux.conf'
+alias valgrind='valgrind --leak-check=full --track-origins=yes'
 
 alias cal="cal -3"
