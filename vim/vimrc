@@ -107,3 +107,6 @@ nnoremap <Leader>c :set cursorcolumn! cursorline!<CR>
 "nmap yr :YRShow<CR>
 "nmap gu :GundoToggle<CR>
 
+set wildmode=longest,list,full
+set wildmenu
+
