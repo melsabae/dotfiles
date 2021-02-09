@@ -29,4 +29,5 @@ fi
 set -o vi  # vi movement
 set -C  # do not clobber with redirect, require >|
 shopt -s cdspell  # autocorrect directory names
+stty -ixon  # Ctrl+S does not halt terminal anymore
 
