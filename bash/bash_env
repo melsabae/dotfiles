@@ -1,7 +1,7 @@
-http_proxy=
-https_proxy=
-ftp_proxy=$http_proxy
-rsync_proxy=$https_proxy
+#http_proxy=
+#https_proxy=
+#ftp_proxy=$http_proxy
+#rsync_proxy=$https_proxy
 
 
 function readonly_export {
@@ -14,9 +14,10 @@ readonly_export LESSHISTFILE /dev/null
 readonly_export INPUTRC $HOME/.config/inputrc
 readonly_export INDENT_PROFILE $HOME/.config/formatting/indent.pro
 readonly_export ARTISTIC_STYLE_PROFILE $HOME/.config/formatting/astylerc
-readonly_export HTTP_PROXY $http_proxy
-readonly_export FTP_PROXY $http_proxy
-readonly_export HTTPS_PROXY $https_proxy
-readonly_export RSYNC_PROXY $https_proxy
 readonly_export EDITOR vim
+
+#readonly_export HTTP_PROXY $http_proxy
+#readonly_export FTP_PROXY $http_proxy
+#readonly_export HTTPS_PROXY $https_proxy
+#readonly_export RSYNC_PROXY $https_proxy
 

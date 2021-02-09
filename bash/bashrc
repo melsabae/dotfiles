@@ -1,33 +1,35 @@
 d=$HOME/.config
 b=$d/bash
 
-[[ -d $d ]]                 && pushd $d > /dev/null
-[[ -f "./dircolors" ]]      && eval $(dircolors ./dircolors) || eval $(dircolors -b)
-[[ -d $b ]]                 && pushd $b > /dev/null
-[[ -f "./bash_vars" ]]      && source "bash_vars"
-[[ -f "./bash_alias" ]]     && source "bash_alias"
-[[ -f "./bash_env" ]]       && source "bash_env"
-[[ -f "./bash_functions" ]] && source "bash_functions"
+[[ -f "$b/bash_vars" ]]      && source "$b/bash_vars"
+[[ -f "$b/bash_alias" ]]     && source "$b/bash_alias"
+[[ -f "$b/bash_env" ]]       && source "$b/bash_env"
+[[ -f "$b/bash_functions" ]] && source "$b/bash_functions"
 
 
-popd > /dev/null
-popd > /dev/null
-
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
-
-set -o vi  # vi movement
 set -C  # do not clobber with redirect, require >|
-shopt -s cdspell  # autocorrect directory names
-stty -ixon  # Ctrl+S does not halt terminal anymore
+
+
+# if shell is in interactive mode
+if [[ "$-" = *i* ]]; then
+    set -o vi  # vi movement
+    shopt -s cdspell  # autocorrect directory names
+    stty -ixon  # Ctrl+S does not halt terminal anymore
+
+    # enable programmable completion features
+    if ! shopt -oq posix; then
+        if [ -f /usr/share/bash-completion/bash_completion ]; then
+            . /usr/share/bash-completion/bash_completion
+        elif [ -f /etc/bash_completion ]; then
+            . /etc/bash_completion
+        fi
+    fi
+
+    # set up LS colors
+    if [[ -f "$d/dircolors" ]]; then
+        eval $(dircolors $d/dircolors)
+    else
+        eval $(dircolors -b)
+    fi
+fi
 
