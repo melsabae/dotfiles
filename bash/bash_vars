@@ -17,5 +17,5 @@ readonly CDPATH=
 
 
 # cannot use readonly otherwise it breaks sudo
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/bin/git_subcommands:$PATH
 

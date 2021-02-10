@@ -35,6 +35,8 @@
         path: tmux.conf
     ~/.config/.pastebinit.xml:
         path: misc/pastebinit.xml
+    ~/bin/git_subcommands:
+        path: git/subcommands
 
 
     # files in a subdir in this repo that need to be linked

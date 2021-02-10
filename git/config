@@ -17,6 +17,7 @@
 	cf = diff-tree --no-commit-id --name-only -r
 	root = rev-parse --show-toplevel
 	clsf = diff-tree --no-commit-id --name-status -r
+	hash = rev-parse --short
 [mergetool]
 	prompt = false
 [user]

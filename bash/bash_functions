@@ -26,10 +26,6 @@ function ps1_branch {
     git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev
 }
 
-function ps1_hash {
-    git rev-parse --short HEAD 2>/dev/null
-}
-
 function ps1_branch_color {
     which git 2>&1 > /dev/null || return 0
 
@@ -40,7 +36,7 @@ function ps1_branch_color {
         return 0
     fi
 
-    local ps1_hash_string=$(ps1_hash)
+    local ps1_hash_string=$(git hash HEAD)
 
     local status=$(git status)
 

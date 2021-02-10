@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ -z "$1" ]]; then
+    git reflog $(git br) | tail -1
+else
+    git reflog $1 | tail -1
+fi
