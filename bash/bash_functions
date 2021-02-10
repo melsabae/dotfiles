@@ -4,6 +4,7 @@ ps1_hostname_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
 ps1_dir_color="\\[$(tput sgr0)\\[$(tput setaf 4)\\[$(tput setab 0)\\]"
 ps1_date_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
 ps1_err_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 1)\\]"
+ps1_hash_color="\\[$(tput sgr0)\\[$(tput setaf 5)\\[$(tput setab 0)\\]"
 
 function ps1_date {
     date +%H:%M:%S
@@ -25,6 +26,10 @@ function ps1_branch {
     git status -uno 2>/dev/null | head -1 | rev | cut -f1 -d' ' | cut -f1 -d'/' | rev
 }
 
+function ps1_hash {
+    git rev-parse --short HEAD 2>/dev/null
+}
+
 function ps1_branch_color {
     which git 2>&1 > /dev/null || return 0
 
@@ -34,6 +39,8 @@ function ps1_branch_color {
     if [[ "$ps1_branch_name" = "" ]]; then
         return 0
     fi
+
+    local ps1_hash_string=$(ps1_hash)
 
     local status=$(git status)
 
@@ -57,7 +64,11 @@ function ps1_branch_color {
         local ps1_branch_color="\\[$(tput bold)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
     fi
 
-    echo -n " $ps1_branch_color$ps1_branch_name"
+    if [[ "$ps1_hash_string" = "" ]]; then
+        echo -n " $ps1_branch_color$ps1_branch_name"
+    else
+        echo -n " $ps1_branch_color$ps1_branch_name$ps1_reset::$ps1_hash_color$ps1_hash_string"
+    fi
 }
 
 function ps1_generator {

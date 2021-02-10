@@ -1,6 +1,7 @@
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-readonly HISTSIZE=1000
-readonly HISTFILESIZE=2000
+readonly HISTSIZE=
+readonly HISTFILESIZE=
+readonly HISTFILE=$HOME/.config/bash/bash_history
 
 
 # do not tab complete *.swp, *.swo, the .git directory

@@ -1,14 +1,6 @@
 d=$HOME/.config
 b=$d/bash
 
-[[ -f "$b/bash_vars" ]]      && source "$b/bash_vars"
-[[ -f "$b/bash_alias" ]]     && source "$b/bash_alias"
-[[ -f "$b/bash_env" ]]       && source "$b/bash_env"
-[[ -f "$b/bash_functions" ]] && source "$b/bash_functions"
-
-
-set -C  # do not clobber with redirect, require >|
-
 
 # if shell is in interactive mode
 if [[ "$-" = *i* ]]; then
@@ -31,5 +23,17 @@ if [[ "$-" = *i* ]]; then
     else
         eval $(dircolors -b)
     fi
+
+    shopt -s histappend
+    history -a
 fi
+
+
+set -C  # do not clobber with redirect, require >|
+
+
+[[ -f "$b/bash_vars" ]]      && source "$b/bash_vars"
+[[ -f "$b/bash_alias" ]]     && source "$b/bash_alias"
+[[ -f "$b/bash_env" ]]       && source "$b/bash_env"
+[[ -f "$b/bash_functions" ]] && source "$b/bash_functions"
 
