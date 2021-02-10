@@ -74,7 +74,7 @@ nnoremap <Leader>c :set cursorcolumn! cursorline!<CR>
 
 
 ""vim-plug calls
-"call plug#begin()
+call plug#begin()
 "Plug 'https://github.com/scrooloose/syntastic.git'
 "Plug 'https://github.com/vim-airline/vim-airline.git'
 "Plug 'https://github.com/jiangmiao/auto-pairs.git'
@@ -91,7 +91,7 @@ nnoremap <Leader>c :set cursorcolumn! cursorline!<CR>
 "Plug 'https://github.com/henrik/vim-markdown-preview'
 "Plug 'https://github.com/jeaye/color_coded.git'
 "Plug 'https://github.com/airblade/vim-gitgutter'
-"call plug#end()
+call plug#end()
 "
 ""vim airline status bar
 "set laststatus=2
