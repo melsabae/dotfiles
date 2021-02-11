@@ -110,3 +110,5 @@ call plug#end()
 set wildmode=longest,list,full
 set wildmenu
 
+iab hguard #ifndef TODO<CR>#define TODO<Esc>3o<Esc>o#endif // TODO<CR><Esc>4ko
+
