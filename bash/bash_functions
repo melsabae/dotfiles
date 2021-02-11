@@ -36,7 +36,7 @@ function ps1_branch_color {
         return 0
     fi
 
-    local ps1_hash_string=$(git hash HEAD)
+    local ps1_hash_string=$(git hash HEAD 2>/dev/null)
 
     local status=$(git status)
 
