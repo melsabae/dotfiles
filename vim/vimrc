@@ -90,6 +90,7 @@ call plug#begin()
 "Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 "Plug 'https://github.com/henrik/vim-markdown-preview'
 "Plug 'https://github.com/jeaye/color_coded.git'
+Plug 'dense-analysis/ale'
 "Plug 'https://github.com/airblade/vim-gitgutter'
 call plug#end()
 "
@@ -107,8 +108,13 @@ call plug#end()
 "nmap yr :YRShow<CR>
 "nmap gu :GundoToggle<CR>
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+
 set wildmode=longest,list,full
 set wildmenu
 
+" macro to fill out a header file
 iab hguard #ifndef TODO<CR>#define TODO<Esc>3o<Esc>o#endif // TODO<CR><Esc>4ko
 
