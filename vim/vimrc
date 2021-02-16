@@ -29,7 +29,11 @@ autocmd BufWritePre * %s/\s\+$//e
 "colorscheme solarized
 
 
-syntax enable
+" there are 2 flags to do syntax
+" so conditionally choose one
+if !exists("g:syntax_on")
+    syntax enable
+endif
 
 
 set number "set all line numbers
