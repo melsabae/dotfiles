@@ -23,6 +23,8 @@
         path: vim
     ~/.config/alacritty:
         path: alacritty
+    ~/.config/systemd:
+        path: systemd
 
     # files in this repo root that need to be linked
     ~/.config/dircolors:

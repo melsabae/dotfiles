@@ -1,0 +1,10 @@
+# enable with sytemctl --user enable <servicename>.service
+
+[Unit]
+Description=Starts mpris-proxy so that bluetooth media controls may work with
+
+[Service]
+ExecStart=/usr/bin/mpris-proxy
+
+[Install]
+WantedBy=default.target
