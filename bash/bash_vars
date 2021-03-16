@@ -13,7 +13,7 @@ readonly PROMPT_COMMAND=ps1_generator
 
 # like $PATH for cd, but automatically fills out path prefixes
 # CDPATH="path/to/thing" would make cd dir work for the path path/to/things/dir
-readonly CDPATH=
+readonly CDPATH=.:
 
 
 # cannot use readonly otherwise it breaks sudo
