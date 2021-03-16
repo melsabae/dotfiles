@@ -18,6 +18,7 @@
 	root = rev-parse --show-toplevel
 	clsf = diff-tree --no-commit-id --name-status -r
 	hash = rev-parse --short
+    lhash = rev-parse
 [mergetool]
 	prompt = false
 [user]
