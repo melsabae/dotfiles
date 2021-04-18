@@ -2,5 +2,5 @@
 Description=Backup keepass db to a different syncthing repo
 
 [Service]
-ExecStart=rsync -pcEAXog /mnt/private_share/syncthing/dropbox/*.kdbx /mnt/private_share/syncthing/all_share/
+ExecStart=/usr/local/sbin/keepass_backup.sh
 
