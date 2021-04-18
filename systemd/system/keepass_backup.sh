@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 
 # place in /usr/local/sbin (root-only), or /usr/local/bin (all users
 
