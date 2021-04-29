@@ -22,8 +22,18 @@ if has("autocmd")
 endif
 
 
+function! AddLastLine()
+    if getline('$') !~ "^$"
+        call append(line('$'), '')
+    endif
+endfunction
+
+
 " strip trailing whitespace when saving
 autocmd BufWritePre * %s/\s\+$//e
+
+
+autocmd BufWritePre * call AddLastLine()
 
 
 "colorscheme solarized
