@@ -1,10 +1,16 @@
 ps1_dir_depth=2
-ps1_reset="\\[$(tput sgr0)\\]"
-ps1_hostname_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
-ps1_dir_color="\\[$(tput sgr0)\\[$(tput setaf 4)\\[$(tput setab 0)\\]"
-ps1_date_color="\\[$(tput dim)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
-ps1_err_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 1)\\]"
-ps1_hash_color="\\[$(tput sgr0)\\[$(tput setaf 5)\\[$(tput setab 0)\\]"
+ps1_reset="\[$(tput sgr0)\]"
+ps1_hostname_color="\[$(tput dim)\[$(tput setaf 7)\[$(tput setab 0)\]"
+ps1_dir_color="\[$(tput sgr0)\[$(tput setaf 4)\[$(tput setab 0)\]"
+ps1_date_color="\[$(tput dim)\[$(tput setaf 7)\[$(tput setab 0)\]"
+ps1_err_color="\[$(tput sgr0)\[$(tput setaf 0)\[$(tput setab 1)\]"
+ps1_hash_color="\[$(tput sgr0)\[$(tput setaf 5)\[$(tput setab 0)\]"
+ps1_branch_unstaged_color="\[$(tput sgr0)\[$(tput setaf 0)\[$(tput setab 3)\]"
+ps1_branch_untracked_color="\[$(tput sgr0)\[$(tput setaf 0)\[$(tput setab 4)\]"
+ps1_branch_staged_color="\[$(tput sgr0)\[$(tput setaf 0)\[$(tput setab 2)\]"
+ps1_branch_remote_difference_color="\[$(tput sgr0)\[$(tput setaf 0)\[$(tput setab 7)\]"
+ps1_branch_clean_color="\[$(tput bold)\[$(tput setaf 7)\[$(tput setab 0)\]"
+
 
 function ps1_date {
     date +%H:%M:%S
@@ -40,24 +46,26 @@ function ps1_branch_color {
 
     local status=$(git status)
 
+
     if [[ $status =~ "not staged" ]];  then
-        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 3)\\]"
+        local ps1_branch_color=$ps1_branch_unstaged_color
 
     # there is an untracked file present that is not in the .gitignore
     elif [[ $status =~ "Untracked files" ]]; then
-        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 4)\\]"
+        local ps1_branch_color=$ps1_branch_untracked_color
 
     # all tracked files with modifications are staged
     elif [[ $status =~ "Changes to be committed" ]]; then
-        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 2)\\]"
+        local ps1_branch_color=$ps1_branch_staged_color
 
     # not in sync with remote
     elif [[ $status =~ "git push" || $status =~ "git pull" ]]; then
-        local ps1_branch_color="\\[$(tput sgr0)\\[$(tput setaf 0)\\[$(tput setab 7)\\]"
+        local ps1_branch_color=$ps1_branch_remote_difference_color
 
     # clean head
     else
-        local ps1_branch_color="\\[$(tput bold)\\[$(tput setaf 7)\\[$(tput setab 0)\\]"
+        local ps1_branch_color=$ps1_branch_clean_color
+
     fi
 
     if [[ "$ps1_hash_string" = "" ]]; then
