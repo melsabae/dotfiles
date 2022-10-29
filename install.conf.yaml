@@ -47,6 +47,14 @@
     ~/.bashrc:
         path: bash/bashrc
 
+    # wrapper scripts that are being used on the inspiron laptop
+    ~/bin/alacritty:
+        path: bin/alacritty
+    ~/bin/retroarch:
+        path: bin/retroarch
+    ~/bin/cryptomator:
+        path: bin/cryptomator
+
 
 - shell:
   - git submodule update --recursive --init
