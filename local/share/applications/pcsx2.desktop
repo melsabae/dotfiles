@@ -1,0 +1,24 @@
+[Desktop Entry]
+
+Type=Application
+
+# The version of the desktop entry specification to which this file complies
+Version=1.0
+
+# The name of the application
+Name=pcsx2
+
+# A comment which can/will be used as a tooltip
+Comment=Wraps pcsx2 with environmental variables
+
+# The path to the folder in which the executable is run
+Path=/home/saba/
+
+# The executable of the application, possibly with arguments.
+Exec=env LIBGL_ALWAYS_SOFTWARE=1 /usr/bin/pcsx2-qt
+
+# Describes whether this application needs to be run in a terminal or not
+Terminal=false
+
+X-Desktop-File-Install-Version=0.26
+

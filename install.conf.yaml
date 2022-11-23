@@ -25,8 +25,6 @@
         path: alacritty
     ~/.config/systemd:
         path: systemd
-    ~/bin/inspiron:
-        path: bin/inspiron
 
 
     # files in this repo root that need to be linked
@@ -49,6 +47,9 @@
         path: bash/bash_profile
     ~/.bashrc:
         path: bash/bashrc
+    ~/.local/share/applications:
+        glob: true
+        path: local/share/applications/*
 
 
 - shell:
