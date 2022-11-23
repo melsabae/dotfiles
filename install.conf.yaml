@@ -25,6 +25,9 @@
         path: alacritty
     ~/.config/systemd:
         path: systemd
+    ~/bin/inspiron:
+        path: bin/inspiron
+
 
     # files in this repo root that need to be linked
     ~/.config/dircolors:
@@ -46,14 +49,6 @@
         path: bash/bash_profile
     ~/.bashrc:
         path: bash/bashrc
-
-    # wrapper scripts that are being used on the inspiron laptop
-    ~/bin/alacritty:
-        path: bin/alacritty
-    ~/bin/retroarch:
-        path: bin/retroarch
-    ~/bin/cryptomator:
-        path: bin/cryptomator
 
 
 - shell:

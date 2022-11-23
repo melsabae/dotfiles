@@ -1,7 +1,7 @@
 alias ls='ls --color=auto'
 alias sl='ls'
 alias ll='ls -l'
-alias lll='ls -al'
+alias lll='ls -Al'
 alias lsl='ls -1 | wc -l'
 alias lst='ll -t'
 
@@ -27,3 +27,4 @@ alias valgrind='valgrind --leak-check=full --track-origins=yes'
 alias cal="cal -3"
 
 alias jobs='jobs -l'
+
