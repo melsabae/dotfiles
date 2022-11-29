@@ -19,6 +19,7 @@ Exec=env LIBGL_ALWAYS_SOFTWARE=1 /usr/bin/pcsx2-qt
 
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false
+Categories=Wrapped Launchers
 
 X-Desktop-File-Install-Version=0.26
 

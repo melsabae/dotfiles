@@ -47,9 +47,9 @@
         path: bash/bash_profile
     ~/.bashrc:
         path: bash/bashrc
-    ~/.local/share/applications:
-        glob: true
-        path: local/share/applications/*
+          #~/.local/share/applications:
+          #    glob: true
+          #    path: local/share/applications/*
 
 
 - shell:
