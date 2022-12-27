@@ -47,9 +47,10 @@
         path: bash/bash_profile
     ~/.bashrc:
         path: bash/bashrc
-          #~/.local/share/applications:
-          #    glob: true
-          #    path: local/share/applications/*
+    ~/.local/share/nemo/actions/clamscan.nemo_action:
+        path: local/share/nemo/actions/clamscan.nemo_action
+    ~/.local/share/applications/firefox.desktop:
+        path: local/share/applications/firefox.desktop
 
 
 - shell:

@@ -1,0 +1,12 @@
+[Nemo Action]
+Name=Clam Scan
+Comment=Clam Scan
+
+Exec=alacritty -e bash -c "clamdscan --fdpass -m %F | less"
+
+Icon-Name=bug-buddy
+
+Selection=Any
+
+Extensions=dir;exe;dll;zip;gz;7z;rar;
+
