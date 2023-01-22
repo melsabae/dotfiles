@@ -1,4 +1,4 @@
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --time-style=long-iso'
 alias sl='ls'
 alias ll='ls -l'
 alias lll='ls -Al'

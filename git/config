@@ -32,3 +32,5 @@
 	rebase = false
 [init]
 	defaultBranch = prod
+[protocol "file"]
+	allow = always
