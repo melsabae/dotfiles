@@ -25,6 +25,8 @@
         path: alacritty
     ~/.config/systemd:
         path: systemd
+    ~/.Xresources:
+        path: Xresources
 
 
     # files in this repo root that need to be linked
