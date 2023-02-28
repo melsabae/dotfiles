@@ -25,8 +25,8 @@
         path: alacritty
     ~/.config/systemd:
         path: systemd
-    ~/.Xresources:
-        path: Xresources
+    ~/.config/htop:
+        path: htop
 
 
     # files in this repo root that need to be linked
@@ -42,6 +42,8 @@
         path: misc/pastebinit.xml
     ~/bin/git_subcommands:
         path: git/subcommands
+    ~/.Xresources:
+        path: Xresources
 
 
     # files in a subdir in this repo that need to be linked
