@@ -27,6 +27,8 @@
         path: systemd
     ~/.config/htop:
         path: htop
+    ~/.config/trizen:
+        path: trizen
 
 
     # files in this repo root that need to be linked
