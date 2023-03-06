@@ -28,3 +28,7 @@ alias cal="cal -3"
 
 alias jobs='jobs -l'
 
+if [[ $(which trizen 2>/dev/null) ]]; then
+    alias trizen="CMAKE_BUILD_PARALLEL_LEVEL=8 trizen"
+fi
+
