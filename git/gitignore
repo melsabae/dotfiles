@@ -52,4 +52,5 @@ a.out
 .ycm_extra_conf.pyc
 .color_coded
 vgcore.*
+core\.[0-9]+
 
