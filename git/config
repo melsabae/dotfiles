@@ -12,7 +12,7 @@
 	br = rev-parse --abbrev-ref HEAD
 	hist = log --pretty=oneline
 	diffw = diff -w --color=auto
-    diffws = diff -w --color=auto --color-words
+    diffws = diffw --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
 	ls = status -s
 	graph = log --decorate=full --graph
 	cf = diff-tree --no-commit-id --name-only -r
