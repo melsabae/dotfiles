@@ -53,4 +53,5 @@ a.out
 .color_coded
 vgcore.*
 core\.[0-9]+
+tags
 

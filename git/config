@@ -11,7 +11,8 @@
 [alias]
 	br = rev-parse --abbrev-ref HEAD
 	hist = log --pretty=oneline
-	diffw = diff -w
+	diffw = diff -w --color=auto
+    diffws = diff -w --color=auto --color-words
 	ls = status -s
 	graph = log --decorate=full --graph
 	cf = diff-tree --no-commit-id --name-only -r
@@ -34,3 +35,4 @@
 	defaultBranch = prod
 [protocol "file"]
 	allow = always
+

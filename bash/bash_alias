@@ -1,9 +1,10 @@
-alias ls='ls --color=auto --time-style=long-iso'
+alias ls='ls --color=auto'
 alias sl='ls'
-alias ll='ls -l'
-alias lll='ls -Al'
+alias ll='ls -l --time-style=long-iso'
+alias lll='ll -A'
 alias lsl='ls -1 | wc -l'
 alias lst='ll -t'
+alias lstl='lll -t'
 
 # color output even through pipes
 alias grep='grep --color=auto'
