@@ -92,3 +92,8 @@ function ps1_generator {
     PS1="$ps1_hostname{$ps1_dir$ps1_branch_name} $ps1_date $ps1_err"
 }
 
+
+function gdb_unset {
+    gdb -ex "call (int) unbind_variable('$1')" --pid=$$ --batch
+}
+

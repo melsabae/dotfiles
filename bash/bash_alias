@@ -4,7 +4,7 @@ alias ll='ls -l --time-style=long-iso'
 alias lll='ll -A'
 alias lsl='ls -1 | wc -l'
 alias lst='ll -t'
-alias lstl='lll -t'
+alias lstl='lll -tr'
 
 # color output even through pipes
 alias grep='grep --color=auto'
