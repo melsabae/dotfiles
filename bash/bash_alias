@@ -1,8 +1,8 @@
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -h'
 alias sl='ls'
 alias ll='ls -l --time-style=long-iso'
 alias lll='ll -A'
-alias lsl='ls -1 | wc -l'
+alias lsl='ll -1 | wc -l'
 alias lst='ll -t'
 alias lstl='lll -tr'
 
