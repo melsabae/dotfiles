@@ -46,8 +46,6 @@
         path: git/subcommands
     ~/.Xresources:
         path: Xresources
-    ~/.gdbinit:
-        path: gdb-dashboard/.gdbinit
 
 
     # files in a subdir in this repo that need to be linked
@@ -63,6 +61,8 @@
         path: scripts/colors.sh
     ~/bin/ps.py:
         path: scripts/ps.py
+    ~/.config/gdb/gdbinit:
+        path: gdb-dashboard/.gdbinit
 
 - shell:
   - git submodule update --recursive --init
