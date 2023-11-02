@@ -4,3 +4,6 @@
 [submodule "formatting"]
 	path = formatting
 	url = https://github.com/melsabae/formatting.git
+[submodule "gdb-dashboard"]
+	path = gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard.git
