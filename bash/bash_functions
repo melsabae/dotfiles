@@ -1,7 +1,7 @@
 ps1_dir_depth=2
 ps1_reset="\[$(tput sgr0)\]"
 ps1_hostname_color="\[$(tput dim)\[$(tput setaf 7)\[$(tput setab 0)\]"
-ps1_dir_color="\[$(tput sgr0)\[$(tput setaf 5)\[$(tput setab 0)\]"
+ps1_dir_color="\[$(tput sgr0)\[$(tput setaf 6)\[$(tput setab 0)\]"
 ps1_date_color="\[$(tput dim)\[$(tput setaf 7)\[$(tput setab 0)\]"
 ps1_err_color="\[$(tput sgr0)\[$(tput setaf 0)\[$(tput setab 1)\]"
 ps1_hash_color="\[$(tput sgr0)\[$(tput setaf 5)\[$(tput setab 0)\]"
