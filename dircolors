@@ -92,7 +92,7 @@ SETUID 1;37;42
 SETGID 1;37;42
 
 # other writabe changes the fg color
-OTHER_WRITABLE 2;31;40
+OTHER_WRITABLE 1;31;40
 
 # sticky is inverted directory colors
 STICKY 0;30;43
