@@ -30,6 +30,7 @@ fi
 
 
 set -C  # do not clobber with redirect, require >|
+set -o pipefail  # cause piped commands to propagate errors
 
 
 [[ -f "$b/bash_vars" ]]      && source "$b/bash_vars"
