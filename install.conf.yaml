@@ -42,7 +42,7 @@
         path: tmux.conf
     ~/.config/.pastebinit.xml:
         path: misc/pastebinit.xml
-    ~/bin/git_subcommands:
+    ~/.local/bin/git_subcommands:
         path: git/subcommands
     ~/.Xresources:
         path: Xresources
@@ -57,9 +57,9 @@
         path: local/share/nemo/actions/clamscan.nemo_action
     ~/.local/share/applications/firefox.desktop:
         path: local/share/applications/firefox.desktop
-    ~/bin/colors.sh:
+    ~/.local/bin/colors.sh:
         path: scripts/colors.sh
-    ~/bin/ps.py:
+    ~/.local/bin/ps.py:
         path: scripts/ps.py
     ~/.config/gdb/gdbinit:
         path: gdb-dashboard/.gdbinit
