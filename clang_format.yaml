@@ -1,0 +1,343 @@
+---
+# i think this is a meta-option, that specifies the usage intent rather than anything mechnical
+Language:        Cpp
+AccessModifierOffset: 0
+AlignAfterOpenBracket: Align
+AlignArrayOfStructures: Left
+AlignConsecutiveAssignments:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignConsecutiveBitFields:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignConsecutiveDeclarations:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignConsecutiveMacros:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignConsecutiveShortCaseStatements:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCaseArrows: true
+  AlignCaseColons: true
+AlignConsecutiveTableGenBreakingDAGArgColons:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignConsecutiveTableGenCondOperatorColons:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignConsecutiveTableGenDefinitionColons:
+  Enabled:         true
+  AcrossEmptyLines: true
+  AcrossComments:  true
+  AlignCompound:   true
+  AlignFunctionPointers: true
+  PadOperators:    true
+AlignEscapedNewlines: LeftWithLastLine
+AlignOperands:   AlignAfterOperator
+AlignTrailingComments:
+  Kind:            Always
+  OverEmptyLines:  2
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowBreakBeforeNoexceptSpecifier: Never
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseExpressionOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortCompoundRequirementOnASingleLine: true
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: false
+
+# deprecated
+AlwaysBreakAfterDefinitionReturnType: TopLevel
+
+AlwaysBreakBeforeMultilineStrings: false
+
+# i dont use these so far
+#AttributeMacros:
+#  - __capability
+
+BinPackArguments: false
+BinPackParameters: false
+BitFieldColonSpacing: Both
+
+# see BreakBeforeBraces below
+#BraceWrapping:
+#  AfterCaseLabel:  true
+#  AfterClass:      true
+#  AfterControlStatement: Always
+#  AfterEnum:       true
+#  AfterExternBlock: true
+#  AfterFunction:   true
+#  AfterNamespace:  true
+#  AfterObjCDeclaration: true
+#  AfterStruct:     true
+#  AfterUnion:      true
+#  BeforeCatch:     true
+#  BeforeElse:      true
+#  BeforeLambdaBody: true
+#  BeforeWhile:     true
+#  IndentBraces:    false
+#  SplitEmptyFunction: true
+#  SplitEmptyRecord: true
+#  SplitEmptyNamespace: true
+BreakAdjacentStringLiterals: true
+BreakAfterAttributes: Always
+
+# i plan to never use this language personally
+#BreakAfterJavaFieldAnnotations: false
+
+BreakAfterReturnType: All
+BreakArrays:     true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeConceptDeclarations: Always
+
+## BraceWrapping above would define this when Custom
+#BreakBeforeBraces: Custom
+BreakBeforeBraces: Allman
+
+BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakFunctionDefinitionParameters: true
+BreakInheritanceList: BeforeComma
+BreakStringLiterals: true
+BreakTemplateDeclarations: Yes
+ColumnLimit:     128
+
+# i dont use this feature (yet?)
+#CommentPragmas:  '^ IWYU pragma:'
+
+CompactNamespaces: false
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: false
+DerivePointerAlignment: false
+DisableFormat:   false
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+
+ForEachMacros:
+  #- foreach  why did they use a lowercase macro name
+  - Q_FOREACH
+  - BOOST_FOREACH
+IfMacros:
+  - KJ_IF_MAYBE
+
+IncludeBlocks:   Regroup
+IncludeCategories:
+  # cpp stdlib
+  - Regex:           '^<[aA-zZ0-9]*>$'
+    Priority:        0
+    SortPriority:    0
+    CaseSensitive:   true
+  # not cpp stdlib, could be a c stdlib or system installed library
+  - Regex:           '^<[aA-zZ0-9]*.hp*>'
+    Priority:        1
+    SortPriority:    1
+    CaseSensitive:   true
+  # not stdlib, system installed, optionally is pathed
+  - Regex:           '^<[aA-zZ0-9/]*.hp*>'
+    Priority:        1
+    SortPriority:    1
+    CaseSensitive:   true
+  # not stdlib, not system installed, uses quotes as an implied local path
+  - Regex:           '^".*'
+    Priority:        3
+    SortPriority:    3
+    CaseSensitive:   false
+
+# i dont understand these
+#IncludeIsMainRegex: '(Test)?$'
+#IncludeIsMainSourceRegex: ''
+
+IndentAccessModifiers: true
+IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentExternBlock: AfterExternBlock
+IndentGotoLabels: false
+IndentPPDirectives: AfterHash
+IndentRequiresClause: true
+IndentWidth:     2
+IndentWrappedFunctionNames: false
+InsertBraces:    true
+
+
+# i think this clashes with KeepEmptyLines:AtEndOfFile, and has lower precendence than that
+#InsertNewlineAtEOF: true
+
+# cant be used with binpacking
+#InsertTrailingCommas: None
+
+IntegerLiteralSeparator:
+  Binary:          4
+  BinaryMinDigits: 5
+  Decimal:         3
+  DecimalMinDigits: 4
+  Hex:             2
+  HexMinDigits:    3
+
+#JavaScriptQuotes: Leave
+#JavaScriptWrapImports: true
+
+KeepEmptyLines:
+  AtEndOfFile:     true
+  AtStartOfBlock:  false
+  AtStartOfFile:   false
+LambdaBodyIndentation: Signature
+LineEnding:      LF
+MacroBlockBegin: ''
+MacroBlockEnd:   ''
+MainIncludeChar: Any
+MaxEmptyLinesToKeep: 2
+NamespaceIndentation: All
+
+# i dont use obj c
+#ObjCBinPackProtocolList: Auto
+#ObjCBlockIndentWidth: 2
+#ObjCBreakBeforeNestedBlockParam: true
+#ObjCSpaceAfterProperty: true
+#ObjCSpaceBeforeProtocolList: false
+
+PackConstructorInitializers: NextLine
+
+# this is a TODO
+#PenaltyBreakAssignment: 2
+#PenaltyBreakBeforeFirstCallParameter: 19
+#PenaltyBreakComment: 300
+#PenaltyBreakFirstLessLess: 120
+#PenaltyBreakOpenParenthesis: 0
+#PenaltyBreakScopeResolution: 500
+#PenaltyBreakString: 1000
+#PenaltyBreakTemplateDeclaration: 10
+#PenaltyExcessCharacter: 1000000
+#PenaltyIndentedWhitespace: 0
+#PenaltyReturnTypeOnItsOwnLine: 200
+
+PointerAlignment: Left
+
+PPIndentWidth:   -1
+
+# this is a weird one, const size_t vs size_t const, but how does it reconcile const T* const ... ?
+QualifierAlignment: Left
+
+# this variables' value is a reference to PointerAlignemtn above
+ReferenceAlignment: Pointer
+
+
+ReflowComments:  false
+
+# given how much i prefer allman, im going to altogether remove this parameter
+#RemoveBracesLLVM: false
+
+# this can cause incorrect code formatting due to other options, so Leave is the preferenc
+RemoveParentheses: Leave
+
+RemoveSemicolon: true
+RequiresClausePosition: OwnLine
+RequiresExpressionIndentation: Keyword
+SeparateDefinitionBlocks: Always
+
+# this seems to control how long a namespace must be before it adds the trailing comment
+ShortNamespaceLines: 0
+
+SkipMacroDefinitionBody: false
+SortIncludes:    CaseSensitive
+
+#SortJavaStaticImport: Before
+
+# this appears to maybe be able to break my code, where i have using declarations that depend on prior using declarations
+# so sorting them would perhaps cause compile errors, so im gonna skip it
+SortUsingDeclarations: Never
+
+SpaceAfterCStyleCast: true
+SpaceAfterLogicalNot: true
+SpaceAfterTemplateKeyword: true
+SpaceAroundPointerQualifiers: Default
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeJsonColon: true
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterForeachMacros: true
+  AfterFunctionDefinitionName: false
+  AfterFunctionDeclarationName: false
+  AfterIfMacros:   true
+  AfterOverloadedOperator: true
+  AfterPlacementOperator: true
+  AfterRequiresInClause: true
+  AfterRequiresInExpression: false
+  BeforeNonEmptyParentheses: false
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles:  Never
+SpacesInContainerLiterals: true
+SpacesInLineCommentPrefix:
+  Minimum:         1
+  Maximum:         1
+SpacesInParens:  Never
+
+# only applicable for SpacesInParens: Custom
+#SpacesInParensOptions:
+#  ExceptDoubleParentheses: false
+#  InCStyleCasts:   false
+#  InConditionalStatements: false
+#  InEmptyParentheses: false
+#  Other:           false
+
+SpacesInSquareBrackets: false
+Standard:        Latest
+StatementAttributeLikeMacros:
+  - Q_EMIT
+StatementMacros:
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
+TableGenBreakInsideDAGArg: DontBreak
+TabWidth:        4
+UseTab:          Never
+VerilogBreakBetweenInstancePorts: true
+WhitespaceSensitiveMacros:
+  - BOOST_PP_STRINGIZE
+  - CF_SWIFT_NAME
+  - NS_SWIFT_NAME
+  - PP_STRINGIZE
+  - STRINGIZE
+...
+

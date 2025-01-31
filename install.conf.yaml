@@ -32,6 +32,8 @@
 
 
     # files in this repo root that need to be linked
+    ~/.config/clang_format.yaml:
+        path: clang_format.yaml
     ~/.config/dircolors:
         path: dircolors
     ~/.config/inputrc:
