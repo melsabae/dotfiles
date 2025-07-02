@@ -6,55 +6,55 @@ AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
   PadOperators:    true
 AlignConsecutiveBitFields:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
   PadOperators:    true
 AlignConsecutiveDeclarations:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
   PadOperators:    true
 AlignConsecutiveMacros:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
   PadOperators:    true
 AlignConsecutiveShortCaseStatements:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCaseArrows: true
   AlignCaseColons: true
 AlignConsecutiveTableGenBreakingDAGArgColons:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
   PadOperators:    true
 AlignConsecutiveTableGenCondOperatorColons:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
   PadOperators:    true
 AlignConsecutiveTableGenDefinitionColons:
   Enabled:         true
-  AcrossEmptyLines: true
+  AcrossEmptyLines: false
   AcrossComments:  true
   AlignCompound:   true
   AlignFunctionPointers: true
@@ -132,7 +132,7 @@ BreakFunctionDefinitionParameters: true
 BreakInheritanceList: BeforeComma
 BreakStringLiterals: true
 BreakTemplateDeclarations: Yes
-ColumnLimit:     128
+ColumnLimit:     110
 
 # i dont use this feature (yet?)
 #CommentPragmas:  '^ IWYU pragma:'

@@ -37,4 +37,5 @@ set -o pipefail  # cause piped commands to propagate errors
 [[ -f "$b/bash_alias" ]]     && source "$b/bash_alias"
 [[ -f "$b/bash_env" ]]       && source "$b/bash_env"
 [[ -f "$b/bash_functions" ]] && source "$b/bash_functions"
+[[ -f "/etc/profile.d/debuginfod.sh" ]] && source "/etc/profile.d/debuginfod.sh"
 
