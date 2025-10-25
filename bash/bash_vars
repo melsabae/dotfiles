@@ -17,7 +17,7 @@ readonly CDPATH=.:
 
 
 # cannot use readonly otherwise it breaks sudo
-export PATH=$HOME/.local/bin:$HOME/.local/bin/git_subcommands:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/git_subcommands:$HOME/.cargo/bin:$PATH
 
 
 # parallel make builds, but also build as much as possible
