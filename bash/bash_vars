@@ -19,3 +19,7 @@ readonly CDPATH=.:
 # cannot use readonly otherwise it breaks sudo
 export PATH=$HOME/.local/bin:$HOME/.local/bin/git_subcommands:$PATH
 
+
+# parallel make builds, but also build as much as possible
+export MAKEFLAGS="-j $(($(grep -c ^processor /proc/cpuinfo) + 1)) -k"
+

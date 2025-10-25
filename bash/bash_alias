@@ -1,10 +1,21 @@
-alias ls='ls --color=auto -h'
+if [[ $(which bat 2>/dev/null) ]]; then
+    alias ls='exa --color=auto -h'
+else
+    alias ls='ls --color=auto -h'
+fi
+
 alias sl='ls'
 alias ll='ls -l --time-style=long-iso'
 alias lll='ll -A'
 alias lsl='ll -1 | wc -l'
-alias lst='ll -t'
-alias lstl='lll -tr'
+
+if [[ $(which bat 2>/dev/null) ]]; then
+    alias lst='ll -t changed --sort newest'
+    alias lstl='lll -t changed --sort newest -r'
+else
+    alias lst='ll -t'
+    alias lstl='lll -tr'
+fi
 
 # color output even through pipes
 alias grep='grep --color=auto'
@@ -23,6 +34,7 @@ alias py='python'
 alias top='htop'
 
 alias tmux='tmux -f ~/.config/tmux.conf'
+
 alias valgrind='valgrind --leak-check=full --track-origins=yes'
 
 alias cal="cal -3"
@@ -31,5 +43,9 @@ alias jobs='jobs -l'
 
 if [[ $(which trizen 2>/dev/null) ]]; then
     alias trizen="CMAKE_BUILD_PARALLEL_LEVEL=8 trizen"
+fi
+
+if [[ $(which bat 2>/dev/null) ]]; then
+    alias cat="bat"
 fi
 
