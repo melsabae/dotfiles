@@ -65,6 +65,12 @@
         path: scripts/ps.py
     ~/.config/gdb/gdbinit:
         path: gdb-dashboard/.gdbinit
+    ~/.local/bin/signal_generator.py:
+        path: scripts/signal_generator.py
+    ~/.local/bin/oscope.exp:
+        path: scripts/oscope.exp
+    ~/.local/bin/plug.sh:
+        path: scripts/plug.sh
 
 - shell:
   - git submodule update --recursive --init
