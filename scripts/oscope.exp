@@ -1,0 +1,54 @@
+#!/usr/bin/expect
+
+#spawn ncat pdu.localdomain 23
+#TODO: read the password in from a file
+#TODO: make this old PDU work with modern SSH configurations
+spawn sshpass -p "TODO:readmefromafile" ssh pdu
+
+#expect "Login:"
+#send "teladmin\r\n"
+#expect "Password:"
+#send "password1\r\n"
+#expect "*********"
+#expect ""
+#expect "Logged in successfully"
+#expect ""
+#
+expect {
+    "Session is full" {
+        puts ""
+        close;
+        exit
+    }
+    ">"
+}
+
+send "read status o01\n"
+sleep 0.2
+expect -re "Outlet.*"
+
+send "read status o02\n"
+sleep 0.2
+expect -re "Outlet.*"
+
+send "read status o03\n"
+sleep 0.2
+expect -re "Outlet.*"
+
+send "read status o04\n"
+sleep 0.2
+expect -re "Outlet.*"
+
+send "sw o02 imme reboot\n"
+sleep 0.2
+expect -re "Outlet.*"
+
+send "quit\r\n"
+sleep 0.2
+expect "Goodbye!"
+
+close
+
+# it doesnt really matter if you use "quit" and wait for it to close the connection and everything looks good
+# you're still rate limited to 2 logins per minute
+
