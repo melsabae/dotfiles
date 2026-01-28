@@ -5,13 +5,13 @@ function usage() {
 
 case "$1" in
     "on")
-        #curl -X GET "http://plug2.localdomain/rpc/Switch.Set?id=0&on=true"
+        curl -X GET "http://plug1.localdomain/rpc/Switch.Set?id=0&on=true"
         ;;
     "off")
-        #curl -X GET "http://plug2.localdomain/rpc/Switch.Set?id=0&on=false"
+        curl -X GET "http://plug1.localdomain/rpc/Switch.Set?id=0&on=false"
         ;;
     "toggle")
-        #curl -X GET http://plug2.localdomain/rpc/Switch.Toggle?id=0
+        curl -X GET "http://plug1.localdomain/rpc/Switch.Toggle?id=0"
         ;;
     *)
         usage

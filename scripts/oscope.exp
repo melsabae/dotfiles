@@ -1,10 +1,6 @@
-#!/usr/bin/expect
+#!/usr/bin/expect -f
 
-#spawn ncat pdu.localdomain 23
-#TODO: read the password in from a file
-#TODO: make this old PDU work with modern SSH configurations
-spawn sshpass -p "TODO:readmefromafile" ssh pdu
-
+##spawn ncat pdu.localdomain 23
 #expect "Login:"
 #send "teladmin\r\n"
 #expect "Password:"
@@ -13,7 +9,11 @@ spawn sshpass -p "TODO:readmefromafile" ssh pdu
 #expect ""
 #expect "Logged in successfully"
 #expect ""
-#
+
+set pdu_password [exec cat $::env(HOME)/.ssh/pdu_password]
+
+spawn sshpass -p $pdu_password ssh pdu
+
 expect {
     "Session is full" {
         puts ""
