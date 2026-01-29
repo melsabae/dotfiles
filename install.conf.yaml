@@ -61,14 +61,14 @@
         path: local/share/applications/firefox.desktop
     ~/.local/bin/colors.sh:
         path: scripts/colors.sh
-    ~/.local/bin/ps.py:
-        path: scripts/ps.py
     ~/.config/gdb/gdbinit:
         path: gdb-dashboard/.gdbinit
     ~/.local/bin/signal_generator.py:
         path: scripts/signal_generator.py
-    ~/.local/bin/oscope.exp:
-        path: scripts/oscope.exp
+    ~/.local/bin/pdu.py:
+        path: scripts/pdu.py
+    ~/.local/bin/oscope.sh:
+        path: scripts/oscope.sh
     ~/.local/bin/plug.py:
         path: scripts/plug.py
 
