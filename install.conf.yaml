@@ -69,8 +69,8 @@
         path: scripts/signal_generator.py
     ~/.local/bin/oscope.exp:
         path: scripts/oscope.exp
-    ~/.local/bin/plug.sh:
-        path: scripts/plug.sh
+    ~/.local/bin/plug.py:
+        path: scripts/plug.py
 
 - shell:
   - git submodule update --recursive --init

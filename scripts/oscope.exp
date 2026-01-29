@@ -1,15 +1,5 @@
 #!/usr/bin/expect -f
 
-##spawn ncat pdu.localdomain 23
-#expect "Login:"
-#send "teladmin\r\n"
-#expect "Password:"
-#send "password1\r\n"
-#expect "*********"
-#expect ""
-#expect "Logged in successfully"
-#expect ""
-
 set pdu_password [exec cat $::env(HOME)/.ssh/pdu_password]
 
 spawn sshpass -p $pdu_password ssh pdu
