@@ -132,16 +132,16 @@ def sig_gen_type(logger, s):
     if not 1e-8 <= freq <= 60e6:
         raise Exception(f"{s} has invalid frequency: {freq}")
 
-    if not -10.0 <= voltage <= 10.0:
+    if not 0.0 <= voltage <= 20.0:
         raise Exception(f"{s} has invalid voltage: {voltage}")
 
-    if not 0.0 <= duty_cycle <= 99.9:
+    if not 0.1 <= duty_cycle <= 99.9:
         raise Exception(f"{s} has invalid duty: {duty_cycle}")
 
     if not -9.99 <= bias <= 9.99:
         raise Exception(f"{s} has invalid bias: {bias}")
 
-    if not 0.0 <= phase <= 360.0:
+    if not 0.0 <= phase <= 359.9:
         raise Exception(f"{s} has invalid phase: {phase}")
 
     if not all(map(lambda s: s in ["0", "1"], sync)):
@@ -149,6 +149,9 @@ def sig_gen_type(logger, s):
 
     if waveform not in ["pulse", "cmos"] and duty != "-":
         logger.warning(f"duty cycle {duty} will be written, but the wave will not have that duty cycle: waveform != {{pulse, cmos}}")
+
+    if (freq >= 31e6 and voltage > 5.0) or (freq >= 11e6 and voltage > 10.0):
+        logger.warning(f"voltage {voltage} will be automatically adjusted by the hardware, check the after config for voltage + bias")
 
     ret = [
         WAVEFORMS.index(waveform),
@@ -237,15 +240,17 @@ parser = argparse.ArgumentParser(
 wave is one of {WAVEFORMS}
 
 freq is [1E-8, 60E6] Hz
-V is +- 10.000 V
-duty is [0.0 to 99.9] %
+V is +- 20.000 V
+duty is [0.1 to 99.9] %
 bias is +- 9.99 V
-phase is [0.0 to 360.0] degrees
+phase is [0.0 to 359.9] degrees
 sync is 5 bits sync ch1 to ch2: freq, wave, amplitude, bias, duty
     f.e. 10100, 11111, 00000, 01010, ...
 
 the signal will have voltage range +- (voltage / 2), bias can be set to +(voltage / 2) to have the signal's min voltage at ~0V
 duty cycle only affects pulse and cmos waves
+voltage range will be adjusted by hardware based on frequency of signal
+wave shape is influenced by frequency, if you need "corners" then lower the frequency if the wave is too rounded
 
 example:
     --ch1 square,1000,3.3,50,1.0,0,00000
