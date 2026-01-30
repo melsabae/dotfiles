@@ -1,13 +1,39 @@
 #!/usr/bin/env python3
 
 
+# signal generator defaults
+#:w20=1,1. :ok
+#:r21=. :r21=0.
+#:r23=. :r23=1100000,0
+#:r25=. :r25=5000.
+#:r29=. :r29=500.
+#:r27=. :r27=1000.
+#:r31=. :r31=0.
+#:r54=. :r54=0.
+#:r22=. :r22=0.
+#:r24=. :r24=1100000,0
+#:r26=. :r26=5000.
+#:r30=. :r30=500.
+#:r28=. :r28=1000.
+#:r32=. :r32=0,0,0,0.
+#:r55=. :r55=0,0,0,0,0.
+# --ch1 1,sine,11000,5.0,50,1.0,00000
+# --ch2 1,sine,11000,5.0,50,1.0,00000
+
+
 import argparse
 import itertools
 import time
 
 
+import colorlog
 import pyvisa
 
+
+FUNC_CODES = {"ch1": [21, 23, 25, 29, 27, 31, 54],
+                "ch2": [22, 24, 26, 30, 28, 32, 55] }
+
+FUNC_PARAMS = ["wave","freq","V","duty","bias","phase","sync"]
 
 WAVEFORMS = [
     "sine",
@@ -19,11 +45,11 @@ WAVEFORMS = [
     "dc",
     "half",
     "full",
-    "+step",
-    "-step",
+    "step+",
+    "step-",
     "noise",
-    "+exp",
-    "-exp",
+    "exp+",
+    "exp-",
     "multitone",
     "sinc",
     "lorenz",
@@ -41,6 +67,15 @@ def to_write_query(func_code, data):
 
 def to_read_query(func_code):
     return f":r{func_code}=."
+
+
+def reverse_frequency(resp):
+    f, scale = map(int, str.split(resp, ","))
+
+    if scale == 0:
+        return float(f / 100)
+
+    return float(f / 100_000_000)
 
 
 def solve_frequency(f_hz):
@@ -66,36 +101,29 @@ def solve_frequency(f_hz):
     return int(out), scale
 
 
+def to_bias(bias_v):
+    return int((bias_v * 100) + 1000)
+
+
 def to_frequency(freq_hz):
     freq, scale = solve_frequency(freq_hz)
 
     return f"{freq},{scale}"
 
 
-def sig_gen_type(s, ch):
+def sig_gen_type(logger, s):
     fields = str.split(s, ",")
 
-    if ch == "ch1":
-        if len(fields) != 8:
-            raise Exception(f"{s} does not have 8 comma separated fields")
-    else:
-        if len(fields) != 7:
-            raise Exception(f"{s} does not have 7 comma separated fields")
+    if len(fields) != 7:
+        raise Exception(f"{s} does not have 7 comma separated fields")
 
-    on = int(fields[0])
-    waveform = fields[1]
-    freq = float(fields[2])
-    voltage = round(float(fields[3]), 3)
-    duty = round(float(fields[4]), 1)
-    bias = round(float(fields[5]), 3)
-    phase = round(float(fields[6]), 1)
-    sync = None
+    waveform, freq, voltage, duty, bias, phase, sync = fields
 
-    if ch == "ch1":
-        sync = fields[7]
-
-    if on not in [0, 1]:
-        raise Exception(f"{s} has invalid output: {on}")
+    freq = float(freq)
+    voltage = round(float(voltage), 3)
+    duty_cycle = round(float(duty), 1)
+    bias = round(float(bias), 2)
+    phase = round(float(phase), 1)
 
     if waveform not in WAVEFORMS:
         raise Exception(f"{s} has invalid waveform: {waveform}")
@@ -107,106 +135,147 @@ def sig_gen_type(s, ch):
     if not -10.0 <= voltage <= 10.0:
         raise Exception(f"{s} has invalid voltage: {voltage}")
 
-    if not 0.1 <= duty <= 100.0:
-        raise Exception(f"{s} has invalid duty: {duty}")
+    if not 0.0 <= duty_cycle <= 99.9:
+        raise Exception(f"{s} has invalid duty: {duty_cycle}")
 
-    if not -10.0 <= bias <= 10.0:
+    if not -9.99 <= bias <= 9.99:
         raise Exception(f"{s} has invalid bias: {bias}")
 
-    if not 0.1 <= phase <= 360.0:
+    if not 0.0 <= phase <= 360.0:
         raise Exception(f"{s} has invalid phase: {phase}")
 
-    # ch2 doesn't have sync bits
-    if ch == "ch1" and not all(map(lambda s: s in ["0", "1"], sync)):
+    if not all(map(lambda s: s in ["0", "1"], sync)):
         raise Exception(f"{s} has invalid sync: {sync}")
 
+    if waveform not in ["pulse", "cmos"] and duty != "-":
+        logger.warning(f"duty cycle {duty} will be written, but the wave will not have that duty cycle: waveform != {{pulse, cmos}}")
+
     ret = [
-        on,
         WAVEFORMS.index(waveform),
         to_frequency(freq),
         int(voltage * 1000),  # to mV
-        int(duty * 10),  # to 1/10 %
-        int(bias * 1000),  # to mV
+        int(duty_cycle * 10),  # to 1/10 %
+        to_bias(bias),
         int(phase * 10),  # to 1/10 degree
         sync,
     ]
 
-    if ch == "ch2":
-        return ret[:-1]
-
     return ret
 
 
-def to_commands(ch, args):
-    func_codes = [21, 23, 25, 29, 27, 31, 54]
-
-    if ch == "ch2":
-        # ch2 doesn't need sync bits
-        func_codes = list(map(lambda n: n + 1, func_codes))[:-1]
-
-    return list(map(lambda fc, d: to_write_query(fc, d), func_codes, args[1:]))
+def to_read_commands(ch):
+    return list(map(to_read_query, FUNC_CODES[ch]))
 
 
-# rm = pyvisa.ResourceManager()
-# dev = rm.open_resource("ASRL/dev/sig_gen", baud_rate=115200)
+def to_write_commands(ch, args):
+    return list(map(lambda fc, d: to_write_query(fc, d), FUNC_CODES[ch], args))
+
+
+def fmt_resp(resp):
+    r = resp[1:]  # strip beginning ":"
+
+    if "ok" == r:
+        return r
+
+    r = r[1:-1]  # strip beginning "r" and trailing "."
+
+    return str.split(r, "=")
+
+
+def exec_command(dev, cmd):
+    return fmt_resp(dev.query(cmd).strip())
+
+
+def dump_ch_config(dev, ch):
+    def dump_resp(resp):
+        func_code = FUNC_CODES[ch].index(int(resp[0]))
+
+        name = FUNC_PARAMS[func_code]
+
+        match name:
+            case "wave":
+                value = WAVEFORMS[int(resp[1])]
+            case "freq":
+                value = reverse_frequency(resp[1])
+            case "V":
+                value = float(resp[1]) / 1000
+            case "duty":
+                value = float(resp[1]) / 10
+            case "bias":
+                value = (float(resp[1]) - 1000.0) / 100.0
+            case "phase":
+                value = float(resp[1]) / 10
+            case "sync":
+                value = resp[1]
+            case _:
+                assert False, f"unknown resp name {name}"
+
+        #return f"{name}={value}"
+        return str(value)
+
+    enabled = exec_command(dev, to_read_query(20))[1].split(",")
+
+    if "ch1" == ch:
+        enabled = enabled[0]
+    else:
+        enabled = enabled[1]
+
+    commands = to_read_commands(ch)
+    resp = list(map(lambda c: exec_command(dev, c), commands))
+
+    return "enabled {}, {}".format(bool(enabled), ",".join(map(dump_resp, resp)))
+
+
+logger = colorlog.getLogger()
+rm = pyvisa.ResourceManager()
+dev = rm.open_resource("ASRL/dev/sig_gen", baud_rate=115200)
 
 parser = argparse.ArgumentParser(
     formatter_class=argparse.RawDescriptionHelpFormatter,
-    epilog=f"""sig-gen arguments take the form: output,wave,freq,V,duty,bias,phase,sync
+    epilog=f"""sig-gen arguments take the form: \"{','.join(FUNC_PARAMS)}\"
 
-sig-gen1 has the sync field, and sig-gen2 does not
+wave is one of {WAVEFORMS}
 
-output = {{ 0 | 1 }}
 freq is [1E-8, 60E6] Hz
-V is +- 10.000V
-duty is [.1 to 100.0] %
-bias is +- 10.000V
-phase is [0.1 to 360.0] degrees
+V is +- 10.000 V
+duty is [0.0 to 99.9] %
+bias is +- 9.99 V
+phase is [0.0 to 360.0] degrees
 sync is 5 bits sync ch1 to ch2: freq, wave, amplitude, bias, duty
     f.e. 10100, 11111, 00000, 01010, ...
-wave in {WAVEFORMS}""",
+
+the signal will have voltage range +- (voltage / 2), bias can be set to +(voltage / 2) to have the signal's min voltage at ~0V
+duty cycle only affects pulse and cmos waves
+
+example:
+    --ch1 square,1000,3.3,50,1.0,0,00000
+    square wave, 1 kHz, 3.3V peak to peak, 50% duty cycle (ignored), 1.0V bias, no phase adjustment, no sync
+
+    the 1khz square wave should go from [-0.65, 2.65] V
+"""
 )
 
-parser.add_argument("--ch1", type=lambda s: sig_gen_type(s, "ch1"), metavar="sig-gen1")
-parser.add_argument("--ch2", type=lambda s: sig_gen_type(s, "ch2"), metavar="sig-gen2")
+parser.add_argument("--ch1-on", action=argparse.BooleanOptionalAction, default=True, help="Enable this channel's signal output")
+parser.add_argument("--ch2-on", action=argparse.BooleanOptionalAction, default=True, help="Enable this channel's signal output")
+parser.add_argument("--ch1", type=lambda s: sig_gen_type(logger, s), metavar="sig-gen1", help="The configuration for channel 1's signal output")
+parser.add_argument("--ch2", type=lambda s: sig_gen_type(logger, s), metavar="sig-gen2", help="The configuration for channel 2's signal output")
 
 args = parser.parse_args().__dict__
-args = dict(filter(lambda kv: kv[1] is not None, args.items()))
-output1 = args["ch1"][0] if "ch1" in args else "0"
-output2 = args["ch2"][0] if "ch2" in args else "0"
-inpt = to_read_query(20)
-
-commands = [to_write_query(20, f"{output1},{output2}")]
+enables = "{},{}".format(int(args["ch1_on"]), int(args["ch2_on"]))
+args = dict(filter(lambda kv: "on" not in kv[0] and kv[1] is not None, args.items()))
+commands = [to_write_query(20, enables)]
 
 for ch in args:
-    commands.extend(to_commands(ch, args[ch]))
+    cfg = dump_ch_config(dev, ch)
+    logger.warning(f"before: {ch} config = {cfg}")
+    commands.extend(to_write_commands(ch, args[ch]))
 
-# TODO: testing
-print(commands)
+for cmd in commands:
+    resp = exec_command(dev, cmd)
+    #logger.warning(f"cmd {cmd} -> {resp}")
 
-
-## enable ch1, disable ch2
-# print(dev.query(to_query("w20", "1,1")).strip())
-## ch1 square wave
-# print(dev.query(to_query("w21", "1")).strip())
-## ch2 noise
-# print(dev.query(to_query("w22", "11")).strip())
-# print(dev.query(to_query("w23", to_frequency(2.5e6))))
-# print(dev.query(to_query("w24", to_frequency(1e6))))
-# print(dev.query(to_query("r25", "")).strip())
-# print(dev.query(to_query("r26", "")).strip())
-## 5V
-# print(dev.query(to_query("w25", "5000")).strip())
-## 1.5V
-# print(dev.query(to_query("w26", "500")).strip())
-# print(dev.query(to_query("r27", "")).strip())
-# print(dev.query(to_query("r28", "")).strip())
-# print(dev.query(to_query("r29", "")).strip())
-# print(dev.query(to_query("r30", "")).strip())
-# print(dev.query(to_query("w29", "510")).strip())
-# print(dev.query(to_query("w29", "990")).strip())
-# print(dev.query(to_query("w27", "1250")).strip())
-# print(dev.query(to_query("w28", "1000")).strip())
-# print(dev.query(to_query("w31", "0")).strip())
-# print(dev.query(to_query("w32", "0")).strip())
+for ch in args:
+    cfg = dump_ch_config(dev, ch)
+    logger.warning(f"after: {ch} config = {cfg}")
+    commands.extend(to_write_commands(ch, args[ch]))
 
