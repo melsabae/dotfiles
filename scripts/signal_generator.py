@@ -30,11 +30,15 @@ import logging
 import pyvisa
 
 
-FUNC_CODES = {"ch1": [21, 23, 25, 29, 27, 31, 54],
-                "ch2": [22, 24, 26, 30, 28, 32, 55] }
-
-FUNC_PARAMS = ["wave","freq","V","duty","bias","phase","sync"]
-
+# NOTE: function code 54 is ch1 sync, and the device responds to 55, which would presumably be ch2 sync
+#       i think sync was intended to force ch2 to change with ch1, everything but phase
+#       sync is 5 bits: freq, wave, amplitude, bias, duty
+#           f.e. 10100, 11111, 00000, 01010, ...
+#           however, only the frequency seems to sync
+#       anyway since we have full programmatic control, and sync doesn't even work, we ignore it
+FUNC_CODES = {"ch1": [21, 23, 25, 29, 27, 31]}
+FUNC_CODES["ch2"] = list(map(lambda n: n + 1, FUNC_CODES["ch1"]))[:-1]
+FUNC_PARAMS = ["wave", "freq", "V", "duty", "bias", "phase"]
 WAVEFORMS = [
     "sine",
     "square",
@@ -111,13 +115,13 @@ def to_frequency(freq_hz):
     return f"{freq},{scale}"
 
 
-def sig_gen_type(logger, s):
+def sig_gen_type(logger, ch, s):
     fields = str.split(s, ",")
 
-    if len(fields) != 7:
-        raise Exception(f"{s} does not have 7 comma separated fields")
+    if len(fields) != 6:
+        raise Exception(f"{s} does not have 6 comma separated fields")
 
-    waveform, freq, voltage, duty, bias, phase, sync = fields
+    waveform, freq, voltage, duty, bias, phase = fields
 
     freq = float(freq)
     voltage = round(float(voltage), 3)
@@ -144,14 +148,18 @@ def sig_gen_type(logger, s):
     if not 0.0 <= phase <= 359.9:
         raise Exception(f"{s} has invalid phase: {phase}")
 
-    if not all(map(lambda s: s in ["0", "1"], sync)):
-        raise Exception(f"{s} has invalid sync: {sync}")
-
     if waveform not in ["pulse", "cmos"] and duty != "-":
-        logger.warning(f"duty cycle {duty} will be written, but the wave will not have that duty cycle: waveform != {{pulse, cmos}}")
+        logger.warning(
+            f"duty cycle only affects waves {{pulse, cmos}}, you may not see the duty cycle you expect"
+        )
+
+    if "ch2" == ch and phase != 0.0:
+        logger.warning(f"ch2 phase was set to {phase}, but phase only affects ch1")
 
     if (freq >= 31e6 and voltage > 5.0) or (freq >= 11e6 and voltage > 10.0):
-        logger.warning(f"voltage {voltage} will be automatically adjusted by the hardware, check the after config for voltage + bias")
+        logger.warning(
+            f"voltage {voltage} will be automatically adjusted by the hardware, check the after config for voltage + bias"
+        )
 
     ret = [
         WAVEFORMS.index(waveform),
@@ -160,7 +168,6 @@ def sig_gen_type(logger, s):
         int(duty_cycle * 10),  # to 1/10 %
         to_bias(bias),
         int(phase * 10),  # to 1/10 degree
-        sync,
     ]
 
     return ret
@@ -208,25 +215,16 @@ def dump_ch_config(dev, ch):
                 value = (float(resp[1]) - 1000.0) / 100.0
             case "phase":
                 value = float(resp[1]) / 10
-            case "sync":
-                value = resp[1]
             case _:
                 assert False, f"unknown resp name {name}"
 
-        #return f"{name}={value}"
+        # return f"{name}={value}"
         return str(value)
-
-    enabled = exec_command(dev, to_read_query(20))[1].split(",")
-
-    if "ch1" == ch:
-        enabled = enabled[0]
-    else:
-        enabled = enabled[1]
 
     commands = to_read_commands(ch)
     resp = list(map(lambda c: exec_command(dev, c), commands))
 
-    return "enabled {}, {}".format(bool(enabled), ",".join(map(dump_resp, resp)))
+    return ",".join(map(dump_resp, resp))
 
 
 logger = logging.getLogger()
@@ -240,47 +238,74 @@ parser = argparse.ArgumentParser(
 wave is one of {WAVEFORMS}
 
 freq is [1E-8, 60E6] Hz
-V is +- 20.000 V
-duty is [0.1 to 99.9] %
-bias is +- 9.99 V
-phase is [0.0 to 359.9] degrees
-sync is 5 bits sync ch1 to ch2: freq, wave, amplitude, bias, duty
-    f.e. 10100, 11111, 00000, 01010, ...
+V is [-20.000, +20.000] V
+duty is [0.1, 99.9] %
+bias is [-9.99, +9.99] V
+phase is [0.0, 359.9] degrees
 
-the signal will have voltage range +- (voltage / 2), bias can be set to +(voltage / 2) to have the signal's min voltage at ~0V
-duty cycle only affects pulse and cmos waves
-voltage range will be adjusted by hardware based on frequency of signal
-wave shape is influenced by frequency, if you need "corners" then lower the frequency if the wave is too rounded
+NOTES:
+    phase only affects ch1
+    the signal will have voltage range +- (voltage / 2), bias can be set to +(voltage / 2) to have the signal's min voltage at ~0V
+    duty cycle only affects pulse and cmos waves
+    voltage range will be adjusted by hardware based on frequency of signal
+    wave shape is influenced by frequency, if you need "corners" then lower the frequency if the wave is too rounded
 
 example:
-    --ch1 square,1000,3.3,50,1.0,0,00000
-    square wave, 1 kHz, 3.3V peak to peak, 50% duty cycle (ignored), 1.0V bias, no phase adjustment, no sync
-
-    the 1khz square wave should go from [-0.65, 2.65] V
-"""
+    --ch1 square,1000,3.3,50,1.0,0
+    square wave, 1 kHz, 3.3V peak to peak, 50% duty cycle, 1.0V bias, no phase adjustment
+        the resultant wave should go from [-0.65, 2.65] V
+""",
 )
 
-parser.add_argument("--ch1-on", action=argparse.BooleanOptionalAction, default=True, help="Enable this channel's signal output")
-parser.add_argument("--ch2-on", action=argparse.BooleanOptionalAction, default=True, help="Enable this channel's signal output")
-parser.add_argument("--ch1", type=lambda s: sig_gen_type(logger, s), metavar="sig-gen1", help="The configuration for channel 1's signal output")
-parser.add_argument("--ch2", type=lambda s: sig_gen_type(logger, s), metavar="sig-gen2", help="The configuration for channel 2's signal output")
+parser.add_argument(
+    "--ch1-on",
+    action=argparse.BooleanOptionalAction,
+    default=True,
+    help="Enable this channel's signal output",
+)
+parser.add_argument(
+    "--ch2-on",
+    action=argparse.BooleanOptionalAction,
+    default=True,
+    help="Enable this channel's signal output",
+)
+parser.add_argument(
+    "--ch1",
+    type=lambda s: sig_gen_type(logger, "ch1", s),
+    metavar="sig-gen1",
+    help="The configuration for channel 1's signal output",
+)
+parser.add_argument(
+    "--ch2",
+    type=lambda s: sig_gen_type(logger, "ch2", s),
+    metavar="sig-gen2",
+    help="The configuration for channel 2's signal output",
+)
 
 args = parser.parse_args().__dict__
 enables = "{},{}".format(int(args["ch1_on"]), int(args["ch2_on"]))
 args = dict(filter(lambda kv: "on" not in kv[0] and kv[1] is not None, args.items()))
 commands = [to_write_query(20, enables)]
 
+enabled = exec_command(dev, to_read_query(20))[1]
+logger.warning(f"power states before: {enabled}")
+
 for ch in args:
     cfg = dump_ch_config(dev, ch)
-    logger.warning(f"before: {ch} config = {cfg}")
+    logger.warning(f"before: {ch} = {cfg}")
     commands.extend(to_write_commands(ch, args[ch]))
 
 for cmd in commands:
     resp = exec_command(dev, cmd)
-    #logger.warning(f"cmd {cmd} -> {resp}")
+    # logger.warning(f"cmd {cmd} -> {resp}")
 
 for ch in args:
     cfg = dump_ch_config(dev, ch)
-    logger.warning(f"after: {ch} config = {cfg}")
+    logger.warning(f"after: {ch} = {cfg}")
     commands.extend(to_write_commands(ch, args[ch]))
+
+# enabled = exec_command(dev, to_read_query(20))[1].split(",")
+
+enabled = exec_command(dev, to_read_query(20))[1]
+logger.warning(f"power states after: {enabled}")
 
