@@ -26,7 +26,7 @@ import itertools
 import time
 
 
-import logging
+import colorlog
 import pyvisa
 
 
@@ -227,7 +227,16 @@ def dump_ch_config(dev, ch):
     return ",".join(map(dump_resp, resp))
 
 
-logger = logging.getLogger()
+def get_logger():
+    handler = colorlog.StreamHandler()
+    logger = colorlog.getLogger()
+
+    handler.setFormatter(colorlog.ColoredFormatter())
+    logger.addHandler(handler)
+
+    return logger
+
+logger = get_logger()
 rm = pyvisa.ResourceManager()
 dev = rm.open_resource("ASRL/dev/sig_gen", baud_rate=115200)
 
