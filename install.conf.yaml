@@ -29,6 +29,8 @@
         path: htop
     ~/.config/trizen:
         path: trizen
+    ~/.local/share/fonts:
+        path: fonts
 
 
     # files in this repo root that need to be linked
